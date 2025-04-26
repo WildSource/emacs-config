@@ -11,11 +11,8 @@
 ;; Remove
 (menu-bar-mode -1)
 
-;; Add line number
+;; add line number
 (global-display-line-numbers-mode)
-
-;; Custom splash screen
-(setq initial-buffer-choice "~/.emacs.d/splash")
 
 ;; Change font size
 (set-face-attribute 'default nil :height 200)

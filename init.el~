@@ -1,16 +1,24 @@
+;; Initialize package system and add package archives
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(setq package-archives
+      '(("gnu" . "https://elpa.gnu.org/packages/")
+        ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
+;; Ensure use-package is installed
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
 
+;; Install and configure packages
 (use-package magit
   :ensure t)
 
 (use-package autothemer
+  :ensure t)
+
+(use-package haskell-mode
   :ensure t)
 
 ;; Set up path for custom themes
@@ -18,3 +26,17 @@
 
 ;; Load your theme — this should work if the file provides it
 (load-theme 'automata t)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages '(autothemer haskell-mode magit)))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
