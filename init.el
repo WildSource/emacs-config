@@ -36,6 +36,9 @@
 (use-package haskell-mode
   :ensure t)
 
+(use-package vterm
+    :ensure t)
+
 (use-package eglot
   :ensure t
   :config
@@ -63,7 +66,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
- '(package-selected-packages '(autothemer haskell-mode magit org-modern)))
+ '(package-selected-packages '(autothemer haskell-mode magit org-modern vterm)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

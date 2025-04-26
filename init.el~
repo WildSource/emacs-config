@@ -5,6 +5,21 @@
         ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
+;; Remove tool-bar
+(tool-bar-mode -1)
+
+;; Remove
+(menu-bar-mode -1)
+
+;; Add line number
+(global-display-line-numbers-mode)
+
+;; Custom splash screen
+(setq initial-buffer-choice "~/.emacs.d/splash")
+
+;; Change font size
+(set-face-attribute 'default nil :height 200)
+
 ;; Ensure use-package is installed
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -21,6 +36,21 @@
 (use-package haskell-mode
   :ensure t)
 
+(use-package eglot
+  :ensure t
+  :config
+  (add-hook 'haskell-mode-hook 'eglot-ensure)
+  :config
+  (setq-default eglot-workspace-configuration
+                '((haskell
+                   (plugin
+                    (stan
+                     (globalOn . :json-false))))))  ;; disable stan
+  :custom
+  (eglot-autoshutdown t)  ;; shutdown language server after closing last file
+  (eglot-confirm-server-initiated-edits nil)  ;; allow edits without confirmation
+  )
+
 ;; Set up path for custom themes
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
@@ -32,7 +62,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(autothemer haskell-mode magit)))
+ '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
+ '(package-selected-packages '(autothemer haskell-mode magit org-modern)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
