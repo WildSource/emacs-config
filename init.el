@@ -20,6 +20,16 @@
 ;; Change font size
 (set-face-attribute 'default nil :height 200)
 
+;; remove symlink prompt for splash and init.el
+(defun my-suppress-vc-symlink-prompt ()
+  (when (or (string-equal (file-truename buffer-file-name) "~/.emacs.d/splash")
+	    (string-equal (file-truename buffer-file-name) "~/.emacs.d/init.el")))
+    (setq-local vc-follow-symlinks t))
+
+(add-hook 'find-file-hook #'my-suppress-vc-symlink-prompt)
+
+
+
 ;; Ensure use-package is installed
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -69,7 +79,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(autothemer fireplace haskell-mode magit org-modern php-mode
+		python-mode vterm))
  '(warning-suppress-log-types '((use-package))))
 
 (custom-set-faces
