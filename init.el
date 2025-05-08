@@ -7,6 +7,9 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 
+;; Add line number
+(global-display-line-numbers-mode)
+
 ;; Package manager
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
