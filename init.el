@@ -1,4 +1,5 @@
 ;; Initialize package system and add package archives
+;; Melpa package repository
 (require 'package)
 (setq package-archives
       '(("gnu" . "https://elpa.gnu.org/packages/")
@@ -7,8 +8,6 @@
 
 ;; Remove tool-bar
 (tool-bar-mode -1)
-
-;; Remove
 (menu-bar-mode -1)
 
 ;; Add line number
@@ -43,16 +42,24 @@
 (setq warning-suppress-types '((comp)))
 
 ;; Ensure use-package is installed
+;; Package manager
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
 
 ;; Install and configure packages
+;; packages
 (use-package magit
-  :ensure t)
+  :ensure t) ;; git gui
 
 (use-package autothemer
+  :ensure t) ;; theme manager
+
+(use-package vterm
+  :ensure t) ;; terminal emulator
+
+(use-package web-mode
   :ensure t)
 
 (use-package haskell-mode
