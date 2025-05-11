@@ -20,6 +20,28 @@
 ;; Change font size
 (set-face-attribute 'default nil :height 200)
 
+;; remove symlink prompt for splash and init.el
+(defun my-suppress-vc-symlink-prompt ()
+  (when (or (string-equal (file-truename buffer-file-name) "~/.emacs.d/splash")
+	    (string-equal (file-truename buffer-file-name) "~/.emacs.d/init.el")))
+    (setq-local vc-follow-symlinks t))
+
+(add-hook 'find-file-hook #'my-suppress-vc-symlink-prompt)
+
+;; Use web-mode for Blade templates
+(add-to-list 'auto-mode-alist '("\\.blade\\.php\\'" . web-mode))
+
+;; Customize web-mode for Blade
+(defun my-web-mode-hook ()
+  (when (string-equal "blade.php" (file-name-extension buffer-file-name))
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-code-indent-offset 2)
+    (setq web-mode-css-indent-offset 2)))
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+
+;; Suppress compiler warnings from web-mode (deprecated stuff)
+(setq warning-suppress-types '((comp)))
+
 ;; Ensure use-package is installed
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -33,13 +55,16 @@
 (use-package autothemer
   :ensure t)
 
-(use-package python-mode
-  :ensure t)
-
 (use-package haskell-mode
   :ensure t)
 
 (use-package php-mode
+  :ensure t)
+
+(use-package lua-mode
+  :ensure t)
+
+(use-package web-mode
   :ensure t)
 
 (use-package vterm
@@ -72,7 +97,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
- '(package-selected-packages '(autothemer haskell-mode magit org-modern php-mode vterm)))
+ '(package-selected-packages
+   '(tx web-mode autothemer fireplace haskell-mode magit org-modern php-mode python-mode vterm))
+ '(warning-suppress-log-types '((use-package))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
