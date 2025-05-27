@@ -59,6 +59,11 @@
 (use-package vterm
   :ensure t) ;; terminal emulator
 
+(use-package exec-path-from-shell
+  :ensure t)
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 (use-package web-mode
   :ensure t)
 
@@ -105,7 +110,7 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(lua-mode tx web-mode autothemer fireplace haskell-mode magit org-modern php-mode python-mode vterm))
+   '(exec-path-from-shell lua-mode tx web-mode autothemer fireplace haskell-mode magit org-modern php-mode python-mode vterm))
  '(warning-suppress-log-types '((use-package))))
 
 (custom-set-faces
