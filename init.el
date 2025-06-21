@@ -64,6 +64,11 @@
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
+(use-package pdf-tools
+  :ensure t
+  :config
+  (pdf-tools-install))
+
 (use-package web-mode
   :ensure t)
 
@@ -110,7 +115,9 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(exec-path-from-shell lua-mode tx web-mode autothemer fireplace haskell-mode magit org-modern php-mode python-mode vterm))
+   '(autothemer exec-path-from-shell fireplace haskell-mode lua-mode
+		magit org-modern pdf-tools php-mode python-mode tx
+		vterm web-mode))
  '(warning-suppress-log-types '((use-package))))
 
 (custom-set-faces
