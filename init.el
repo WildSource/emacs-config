@@ -49,7 +49,9 @@
 (require 'use-package)
 
 ;; Install and configure packages
-;; packages
+
+;; essentials-------------------------
+
 (use-package magit
   :ensure t) ;; git gui
 
@@ -69,6 +71,8 @@
   :config
   (pdf-tools-install))
 
+;; dev modes---------------------------
+
 (use-package web-mode
   :ensure t)
 
@@ -78,14 +82,7 @@
 (use-package php-mode
   :ensure t)
 
-(use-package lua-mode
-  :ensure t)
-
-(use-package web-mode
-  :ensure t)
-
-(use-package vterm
-    :ensure t)
+;; lsp -------------------------------
 
 (use-package eglot
   :ensure t
@@ -102,20 +99,76 @@
   (eglot-confirm-server-initiated-edits nil)  ;; allow edits without confirmation
   )
 
+;; aesthetics -----------------------
+
+(use-package nyan-mode
+  :ensure t
+  :config
+  (nyan-mode 1))  ;; Enable nyan-mode
+
 ;; Set up path for custom themes
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
 ;; Load your theme — this should work if the file provides it
 (load-theme 'automata t)
 
+;; custom commands ------------------------------------
+
+;; switch 2 buffers from vertical to horizontal split and vice versa
+(defun toggle-window-split ()
+  "Toggle between vertical and horizontal split with 2 windows."
+  (interactive)
+  (if (= (count-windows) 2)
+      (let* ((this-win-buffer (window-buffer))
+             (next-win-buffer (window-buffer (next-window)))
+             (this-win-edges (window-edges (selected-window)))
+             (next-win-edges (window-edges (next-window)))
+             (split-vertically-p
+              (= (car this-win-edges)
+                 (car next-win-edges)))
+             (splitter
+              (if split-vertically-p
+                  #'split-window-horizontally
+                #'split-window-vertically)))
+        (delete-other-windows)
+        (let ((first-window (selected-window)))
+          (funcall splitter)
+          (if split-vertically-p
+              (set-window-buffer (next-window) this-win-buffer)
+            (set-window-buffer (next-window) next-win-buffer))
+          (set-window-buffer first-window
+                             (if split-vertically-p
+                                 next-win-buffer
+                               this-win-buffer)))
+        (other-window 1))))
+
+(defalias 'tws 'toggle-window-split)
+
+;; swap buffers left to right and vice versa for both vertical and horizontal split
+
+(defun swap-window-buffers ()
+  "Swap buffers between two windows."
+  (interactive)
+  (when (= (count-windows) 2)
+    (let* ((win1 (selected-window))
+           (win2 (next-window))
+           (buf1 (window-buffer win1))
+           (buf2 (window-buffer win2)))
+      (set-window-buffer win1 buf2)
+      (set-window-buffer win2 buf1)
+      (select-window win2))))
+
+(defalias 'swb 'swap-window-buffers)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(autothemer exec-path-from-shell fireplace haskell-mode lua-mode magit org-modern pdf-tools php-mode python-mode tx vterm web-mode))
+   '(autothemer exec-path-from-shell fireplace haskell-mode
+		magit nyan-mode org-modern pdf-tools php-mode
+		tx vterm web-mode))
  '(warning-suppress-log-types '((use-package))))
 
 (custom-set-faces
