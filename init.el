@@ -17,7 +17,7 @@
 (setq initial-buffer-choice "~/.emacs.d/splash")
 
 ;; Change font size
-(set-face-attribute 'default nil :height 130)
+(set-face-attribute 'default nil :height 200)
 
 ;; remove symlink prompt for splash and init.el
 (defun my-suppress-vc-symlink-prompt ()
@@ -115,9 +115,7 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(autothemer exec-path-from-shell fireplace haskell-mode lua-mode
-		magit org-modern pdf-tools php-mode python-mode tx
-		vterm web-mode))
+   '(autothemer exec-path-from-shell fireplace haskell-mode lua-mode magit org-modern pdf-tools php-mode python-mode tx vterm web-mode))
  '(warning-suppress-log-types '((use-package))))
 
 (custom-set-faces
