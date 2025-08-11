@@ -169,7 +169,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(autothemer exec-path-from-shell haskell-mode magit nyan-mode
+		pdf-tools php-mode vterm vue-mode web-mode))
  '(warning-suppress-log-types '((use-package))))
 
 (custom-set-faces
