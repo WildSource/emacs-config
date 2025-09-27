@@ -59,6 +59,12 @@
 (use-package magit
   :ensure t) ;; git gui
 
+;; Magit github account setup
+(setenv "GIT_AUTHOR_NAME" "WildSource")
+(setenv "GIT_AUTHOR_EMAIL" "ilovetrap123@hotmail.com")
+(setenv "GIT_COMMITTER_NAME" "WildSource")
+(setenv "GIT_COMMITTER_EMAIL" "ilovetrap123@hotmail.com")
+
 (use-package autothemer
   :ensure t) ;; theme manager
 
