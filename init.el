@@ -10,6 +10,9 @@
 (ido-mode 1)
 (setq ido-show-dot-for-dired t) ;; enable entering current dir
 
+;; Remove annoying ass bell
+(setq ring-bell-function 'ignore)
+
 ;; Remove tool-bar
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -177,8 +180,8 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(0blayout autothemer exec-path-from-shell haskell-mode magit
-	      nyan-mode pdf-tools php-mode slime vterm web-mode))
+   '(0blayout angular-mode autothemer exec-path-from-shell haskell-mode
+	      magit nyan-mode pdf-tools php-mode slime vterm web-mode))
  '(warning-suppress-log-types '((use-package))))
 
 (custom-set-faces
