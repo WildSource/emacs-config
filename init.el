@@ -95,6 +95,9 @@
 (use-package php-mode
   :ensure t)
 
+(use-package elm-mode
+  :ensure t)
+
 ;; lsp -------------------------------
 
 (use-package eglot
