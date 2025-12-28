@@ -20,8 +20,8 @@
 ;; Add line number
 (global-display-line-numbers-mode)
 
-;; Custom splash screen
-(setq initial-buffer-choice "~/.emacs.d/splash")
+;; Set initial buffer to *scratch*
+(setq initial-buffer-choice t)
 
 ;; Change font size
 (set-face-attribute 'default nil :height 200)
