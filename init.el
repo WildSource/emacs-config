@@ -103,16 +103,14 @@
 (use-package eglot
   :ensure t
   :config
-  (add-hook 'haskell-mode-hook 'eglot-ensure)
-  :config
-  (setq-default eglot-workspace-configuration
-                '((haskell
-                   (plugin
-                    (stan
-                     (globalOn . :json-false))))))  ;; disable stan
+  ;; Register your language servers here
+  (add-to-list 'eglot-server-programs '(haskell-mode . ("haskell-language-server-wrapper" "--stdio")))
+  (add-to-list 'eglot-server-programs '(elm-mode . ("/home/WildSource/.npm-global/bin/elm-language-server" "--stdio")))
+  
   :custom
-  (eglot-autoshutdown t)  ;; shutdown language server after closing last file
-  (eglot-confirm-server-initiated-edits nil)  ;; allow edits without confirmation
+  (eglot-connect-timeout 90)
+  (eglot-autoshutdown t)      ;; Recommended: cleans up RAM when you close the file
+  (eglot-events-buffer-size 0) ;; Speeds up performance on your i7-3632QM
   )
 
 ;; aesthetics -----------------------
@@ -183,9 +181,7 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(0blayout angular-mode autothemer exec-path-from-shell haskell-mode
-	      magit nyan-mode pdf-tools php-mode slime vterm web-mode))
- '(warning-suppress-log-types '((use-package))))
+   '(lsp-mode seq nyan-mode eglot elm-mode php-mode haskell-mode web-mode pdf-tools exec-path-from-shell vterm autothemer magit use-package)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -193,3 +189,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(message "All good !")
