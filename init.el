@@ -34,17 +34,6 @@
 
 (add-hook 'find-file-hook #'my-suppress-vc-symlink-prompt)
 
-;; Use web-mode for Blade templates
-(add-to-list 'auto-mode-alist '("\\.blade\\.php\\'" . web-mode))
-
-;; Customize web-mode for Blade
-(defun my-web-mode-hook ()
-  (when (string-equal "blade.php" (file-name-extension buffer-file-name))
-    (setq web-mode-markup-indent-offset 2)
-    (setq web-mode-code-indent-offset 2)
-    (setq web-mode-css-indent-offset 2)))
-(add-hook 'web-mode-hook  'my-web-mode-hook)
-
 ;; Suppress compiler warnings from web-mode (deprecated stuff)
 (setq warning-suppress-types '((comp)))
 
@@ -92,26 +81,8 @@
 (use-package haskell-mode
   :ensure t)
 
-(use-package php-mode
-  :ensure t)
-
 (use-package elm-mode
   :ensure t)
-
-;; lsp -------------------------------
-
-(use-package eglot
-  :ensure t
-  :config
-  ;; Register your language servers here
-  (add-to-list 'eglot-server-programs '(haskell-mode . ("haskell-language-server-wrapper" "--stdio")))
-  (add-to-list 'eglot-server-programs '(elm-mode . ("/home/WildSource/.npm-global/bin/elm-language-server" "--stdio")))
-  
-  :custom
-  (eglot-connect-timeout 90)
-  (eglot-autoshutdown t)      ;; Recommended: cleans up RAM when you close the file
-  (eglot-events-buffer-size 0) ;; Speeds up performance on your i7-3632QM
-  )
 
 ;; aesthetics -----------------------
 
