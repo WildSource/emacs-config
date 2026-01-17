@@ -46,6 +46,13 @@
 
 ;; Install and configure packages
 
+;; Multiple cursor keybinds
+(require 'multiple-cursors)
+
+(global-set-key (kbd "C-c n") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-c p") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c a") 'mc/mark-all-like-this)
+
 ;; essentials-------------------------
 
 (use-package magit
@@ -152,7 +159,9 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(lsp-mode seq nyan-mode eglot elm-mode php-mode haskell-mode web-mode pdf-tools exec-path-from-shell vterm autothemer magit use-package)))
+   '(autothemer eglot elm-mode exec-path-from-shell haskell-mode lsp-mode
+		magit multiple-cursors nyan-mode pdf-tools php-mode
+		seq use-package vterm web-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
