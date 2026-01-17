@@ -13,6 +13,10 @@
 ;; Remove annoying ass bell
 (setq ring-bell-function 'ignore)
 
+;; Make buffer transparent
+(set-frame-parameter nil 'alpha-background 85)
+(add-to-list 'default-frame-alist '(alpha-background . 85))
+
 ;; Remove tool-bar
 (tool-bar-mode -1)
 (menu-bar-mode -1)
