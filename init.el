@@ -24,7 +24,7 @@
 (setq initial-buffer-choice t)
 
 ;; Change font size
-(set-face-attribute 'default nil :height 200)
+(set-face-attribute 'default nil :height 150)
 
 ;; remove symlink prompt for splash and init.el
 (defun my-suppress-vc-symlink-prompt ()
