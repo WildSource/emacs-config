@@ -1,3 +1,7 @@
+;; debian apt command to run before evaluating the config file
+;;
+;; sudo apt update && sudo apt install -y git fzf build-essential cmake libtool-bin libvterm-dev libpoppler-glib-dev libpoppler-private-dev zlib1g-dev libpng-dev
+;;
 ;; Initialize package system and add package archives
 ;; Melpa package repository
 (require 'package)
