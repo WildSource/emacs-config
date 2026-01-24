@@ -55,11 +55,12 @@
 ;; Install and configure packages
 
 ;; Multiple cursor keybinds
-(require 'multiple-cursors)
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C-c n" . mc/mark-next-like-this)
+	 ("C-c p" . mc/mark-previous-like-this)
+	 ("C-c a" . mc/mark-all-like-this)))
 
-(global-set-key (kbd "C-c n") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-c p") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c a") 'mc/mark-all-like-this)
 
 ;; essentials-------------------------
 
