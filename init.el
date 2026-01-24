@@ -124,6 +124,11 @@
 (load-theme 'automata t)
 
 ;; custom commands ------------------------------------
+(defun hoogle (searchQuery)
+  "Opens a eww buffer in Hoogle on the searched query arguments"
+  (interactive "sSearch Hoogle:")
+  (eww (concat "https://hoogle.haskell.org/?hoogle=" searchQuery)))
+(keymap-global-set "C-c h" 'hoogle)
 
 ;; switch 2 buffers from vertical to horizontal split and vice versa
 (defun toggle-window-split ()
