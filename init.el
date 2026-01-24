@@ -84,6 +84,21 @@
   :config
   (pdf-tools-install))
 
+(use-package fzf
+  :ensure t
+  :bind ("C-c f" . fzf)
+  :config
+  (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
+        fzf/executable "fzf"
+        fzf/git-grep-args "-i --line-number %s"
+        ;; command used for `fzf-grep-*` functions
+        ;; example usage for ripgrep:
+        ;; fzf/grep-command "rg --no-heading -nH"
+        fzf/grep-command "grep -nrH"
+        ;; If nil, the fzf buffer will appear at the top of the window
+        fzf/position-bottom t
+        fzf/window-height 15))
+
 ;; dev modes---------------------------
 
 (use-package web-mode
@@ -163,9 +178,9 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(autothemer eglot elm-mode exec-path-from-shell haskell-mode lsp-mode
-		magit multiple-cursors nyan-mode pdf-tools php-mode
-		seq use-package vterm web-mode)))
+   '(autothemer eglot elm-mode exec-path-from-shell fzf haskell-mode
+		lsp-mode magit multiple-cursors nyan-mode pdf-tools
+		php-mode seq use-package vterm web-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
