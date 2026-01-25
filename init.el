@@ -18,8 +18,8 @@
 (setq ring-bell-function 'ignore)
 
 ;; Make buffer transparent
-(set-frame-parameter nil 'alpha-background 85)
-(add-to-list 'default-frame-alist '(alpha-background . 85))
+(set-frame-parameter nil 'alpha-background 70)
+(add-to-list 'default-frame-alist '(alpha-background . 70))
 
 ;; Remove tool-bar
 (tool-bar-mode -1)
@@ -44,6 +44,9 @@
 
 ;; Suppress compiler warnings from web-mode (deprecated stuff)
 (setq warning-suppress-types '((comp)))
+
+;; send literal C-t only when vterm is the active buffer (for ratpoison)
+
 
 ;; Ensure use-package is installed
 ;; Package manager
