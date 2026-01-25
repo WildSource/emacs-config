@@ -136,7 +136,11 @@
   "Opens a eww buffer in Hoogle on the searched query arguments"
   (interactive "sSearch Hoogle:")
   (eww (concat "https://hoogle.haskell.org/?hoogle=" searchQuery)))
-(keymap-global-set "C-c h" 'hoogle)
+
+(defun hackage ()
+  "Opens a eww buffer in Hackage on the noscript mode search"
+  (interactive)
+  (eww "https://hackage.haskell.org/packages/noscript-search"))
 
 ;; switch 2 buffers from vertical to horizontal split and vice versa
 (defun toggle-window-split ()
