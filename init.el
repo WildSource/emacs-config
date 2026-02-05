@@ -45,9 +45,6 @@
 ;; Suppress compiler warnings from web-mode (deprecated stuff)
 (setq warning-suppress-types '((comp)))
 
-;; send literal C-t only when vterm is the active buffer (for ratpoison)
-
-
 ;; Ensure use-package is installed
 ;; Package manager
 (unless (package-installed-p 'use-package)
@@ -129,7 +126,7 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
 ;; Load your theme — this should work if the file provides it
-(load-theme 'automata t)
+(load-theme 'purple-haze t)
 
 ;; custom commands ------------------------------------
 (defun hoogle (searchQuery)
@@ -195,9 +192,9 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(autothemer eglot elm-mode exec-path-from-shell fzf haskell-mode
-		lsp-mode magit multiple-cursors nyan-mode pdf-tools
-		php-mode seq use-package vterm web-mode)))
+   '(autothemer eglot elm-mode exec-path-from-shell fzf gdscript-mode
+		haskell-mode lsp-mode magit multiple-cursors nyan-mode
+		pdf-tools php-mode seq use-package vterm web-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
