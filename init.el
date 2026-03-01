@@ -192,9 +192,10 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(autothemer eglot elm-mode exec-path-from-shell fzf gdscript-mode
-		haskell-mode lsp-mode magit multiple-cursors nyan-mode
-		pdf-tools php-mode seq use-package vterm web-mode)))
+   '(autothemer dired-video-thumbnail eglot elm-mode exec-path-from-shell
+		ffmpeg-player fzf haskell-mode lsp-mode magit
+		multiple-cursors nyan-mode pdf-tools php-mode seq
+		use-package vterm web-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
