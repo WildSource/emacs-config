@@ -52,7 +52,7 @@
   (package-install 'use-package))
 (require 'use-package)
 
-;; Install and configure packages
+;; Global and General keybinds -----------------
 
 ;; Multiple cursor keybinds
 (use-package multiple-cursors
@@ -60,6 +60,9 @@
   :bind (("C-c n" . mc/mark-next-like-this)
 	 ("C-c p" . mc/mark-previous-like-this)
 	 ("C-c a" . mc/mark-all-like-this)))
+
+;; recompile keybind
+(global-set-key (kbd "C-c r") 'recompile)
 
 
 ;; essentials-------------------------
