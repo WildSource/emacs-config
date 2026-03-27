@@ -119,6 +119,11 @@
   :config
   (golden-ratio-mode 1))
 
+(use-package move-text
+  :ensure t
+  :config
+  (move-text-default-bindings))
+
 ;; MAJOR MODES ---------------------------
 
 (use-package web-mode
@@ -219,7 +224,7 @@
  '(package-selected-packages
    '(autothemer beacon darktooth-theme dired-video-thumbnail eglot
 		elm-mode exec-path-from-shell ffmpeg-player focus fzf
-		golden-ratio haskell-mode lsp-mode magit
+		golden-ratio haskell-mode lsp-mode magit move-text
 		multiple-cursors nyan-mode pdf-tools seq use-package
 		vterm web-mode)))
 
