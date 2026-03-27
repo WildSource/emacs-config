@@ -12,6 +12,8 @@
 
 ;; EMACS SPECIFIC CONFIG ------------------
 
+(add-hook 'haskell-mode-hook 'eglot-ensure)
+
 ;; autocompletion on file searching in dired mode
 (ido-mode 1)
 (setq ido-show-dot-for-dired t) ;; enable entering current dir
@@ -237,10 +239,9 @@
  '(package-selected-packages
    '(autothemer beacon darktooth-theme dimmer dired-video-thumbnail eglot
 		elm-mode exec-path-from-shell ffmpeg-player focus fzf
-		golden-ratio haskell-mode highlight-indent-guides
-		lsp-mode magit move-text multiple-cursors nyan-mode
-		pdf-tools rainbow-delimiters seq use-package vterm
-		web-mode)))
+		golden-ratio haskell-mode lsp-mode magit move-text
+		multiple-cursors nyan-mode pdf-tools
+		rainbow-delimiters seq use-package vterm web-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
