@@ -140,6 +140,11 @@
 (use-package darktooth-theme
   :ensure t)
 
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
 (use-package nyan-mode
   :ensure t
   :config
@@ -225,8 +230,8 @@
    '(autothemer beacon darktooth-theme dired-video-thumbnail eglot
 		elm-mode exec-path-from-shell ffmpeg-player focus fzf
 		golden-ratio haskell-mode lsp-mode magit move-text
-		multiple-cursors nyan-mode pdf-tools seq use-package
-		vterm web-mode)))
+		multiple-cursors nyan-mode pdf-tools
+		rainbow-delimiters seq use-package vterm web-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
