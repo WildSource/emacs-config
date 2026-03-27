@@ -122,13 +122,18 @@
 
 ;; AESTHETICS  -----------------------
 
+(use-package darktooth-theme
+  :ensure t)
+
 (use-package nyan-mode
   :ensure t
   :config
   (nyan-mode 1))  ;; Enable nyan-mode
 
 ;; Load your theme — this should work if the file provides it
-(load-theme 'purple-haze t)
+(load-theme 'darktooth t)
+;;(load-theme 'automata t)
+;;(load-theme 'purple-haze t)
 
 ;; CUSTOM COMMANDS ------------------------------------
 
@@ -189,10 +194,10 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(autothemer dired-video-thumbnail eglot elm-mode exec-path-from-shell
-		ffmpeg-player fzf haskell-mode lsp-mode magit
-		multiple-cursors nyan-mode pdf-tools php-mode seq
-		use-package vterm web-mode zig-mode)))
+   '(autothemer darktooth-theme dired-video-thumbnail eglot elm-mode
+		exec-path-from-shell ffmpeg-player fzf haskell-mode
+		lsp-mode magit multiple-cursors nyan-mode pdf-tools
+		php-mode seq use-package vterm web-mode zig-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
