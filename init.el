@@ -145,6 +145,14 @@
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+(use-package dimmer
+  :ensure t
+  :config
+  (dimmer-configure-magit)
+  (dimmer-configure-org)
+  (setq dimmer-fraction 0.50)
+  (dimmer-mode t))
+
 (use-package nyan-mode
   :ensure t
   :config
@@ -227,11 +235,12 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(autothemer beacon darktooth-theme dired-video-thumbnail eglot
+   '(autothemer beacon darktooth-theme dimmer dired-video-thumbnail eglot
 		elm-mode exec-path-from-shell ffmpeg-player focus fzf
-		golden-ratio haskell-mode lsp-mode magit move-text
-		multiple-cursors nyan-mode pdf-tools
-		rainbow-delimiters seq use-package vterm web-mode)))
+		golden-ratio haskell-mode highlight-indent-guides
+		lsp-mode magit move-text multiple-cursors nyan-mode
+		pdf-tools rainbow-delimiters seq use-package vterm
+		web-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
