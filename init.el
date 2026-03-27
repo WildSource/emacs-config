@@ -46,11 +46,6 @@
 ;; Suppress compiler warnings from web-mode (deprecated stuff)
 (setq warning-suppress-types '((comp)))
 
-;; KEYBINDS -----------------
-
-;; recompile keybind
-(global-set-key (kbd "C-c r") 'recompile)
-
 ;; USE-PACKAGES -------------------------
 
 ;; Ensure use-package is installed
@@ -60,6 +55,8 @@
   (package-install 'use-package))
 (require 'use-package)
 
+;; EMACS ESSENTIALS
+
 ;; Multiple cursor keybinds
 (use-package multiple-cursors
   :ensure t
@@ -68,21 +65,18 @@
 	 ("C-c a" . mc/mark-all-like-this)))
 
 (use-package magit
-  :ensure t) ;; git gui
-
-;; Magit github account setup
+  :ensure t)
 (setenv "GIT_AUTHOR_NAME" "WildSource")
 (setenv "GIT_AUTHOR_EMAIL" "ilovetrap123@hotmail.com")
 (setenv "GIT_COMMITTER_NAME" "WildSource")
 (setenv "GIT_COMMITTER_EMAIL" "ilovetrap123@hotmail.com")
 
 (use-package autothemer
-  :ensure t) ;; theme manager
-;; Set up path for custom themes
+  :ensure t)
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
 (use-package vterm
-  :ensure t) ;; terminal emulator
+  :ensure t)
 
 (use-package exec-path-from-shell
   :ensure t)
@@ -109,6 +103,22 @@
         fzf/position-bottom t
         fzf/window-height 15))
 
+;; QUALITY OF LIFE
+
+(use-package focus
+  :ensure t
+  :config
+  (focus-mode 1))
+
+(use-package beacon
+  :ensure t)
+(beacon-mode 1)
+
+(use-package golden-ratio
+  :ensure t
+  :config
+  (golden-ratio-mode 1))
+
 ;; MAJOR MODES ---------------------------
 
 (use-package web-mode
@@ -130,12 +140,18 @@
   :config
   (nyan-mode 1))  ;; Enable nyan-mode
 
-;; Load your theme — this should work if the file provides it
-(load-theme 'darktooth t)
-;;(load-theme 'automata t)
-;;(load-theme 'purple-haze t)
+;; KEYBINDS -----------------
+
+(global-set-key (kbd "C-c i") 'open-init)
+
+;; recompile keybind
+(global-set-key (kbd "C-c r") 'recompile)
 
 ;; CUSTOM COMMANDS ------------------------------------
+
+(defun open-init ()
+  (interactive)
+  (find-file "/home/wildsource/emacs-config/init.el"))
 
 ;; switch 2 buffers from vertical to horizontal split and vice versa
 (defun toggle-window-split ()
@@ -182,10 +198,17 @@
       (select-window win2))))
 
 (defalias 'swb 'swap-window-buffers)
-
-;; OTHER CONFIGS
  
 ;; STUFF TO RUN AND ENABLE
+
+(electric-pair-mode 1)
+
+;; Load your theme — this should work if the file provides it
+(load-theme 'darktooth t)
+;;(load-theme 'automata t)
+;;(load-theme 'purple-haze t)
+
+;; BELOW IS MANAGED BY EMACS ITSELF
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -194,10 +217,11 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(autothemer darktooth-theme dired-video-thumbnail eglot elm-mode
-		exec-path-from-shell ffmpeg-player fzf haskell-mode
-		lsp-mode magit multiple-cursors nyan-mode pdf-tools
-		php-mode seq use-package vterm web-mode zig-mode)))
+   '(autothemer beacon darktooth-theme dired-video-thumbnail eglot
+		elm-mode exec-path-from-shell ffmpeg-player focus fzf
+		golden-ratio haskell-mode lsp-mode magit
+		multiple-cursors nyan-mode pdf-tools seq use-package
+		vterm web-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
