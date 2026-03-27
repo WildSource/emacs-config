@@ -1,7 +1,7 @@
 ;; debian apt command to run before evaluating the config file
 ;;
 ;; sudo apt update && sudo apt install -y git fzf build-essential cmake libtool-bin libvterm-dev libpoppler-glib-dev libpoppler-private-dev zlib1g-dev libpng-dev
-;;
+
 ;; Initialize package system and add package archives
 ;; Melpa package repository
 (require 'package)
@@ -9,6 +9,8 @@
       '(("gnu" . "https://elpa.gnu.org/packages/")
         ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
+
+;; EMACS SPECIFIC CONFIG ------------------
 
 ;; autocompletion on file searching in dired mode
 (ido-mode 1)
@@ -39,11 +41,17 @@
   (when (or (string-equal (file-truename buffer-file-name) "~/.emacs.d/splash")
 	    (string-equal (file-truename buffer-file-name) "~/.emacs.d/init.el")))
     (setq-local vc-follow-symlinks t))
-
 (add-hook 'find-file-hook #'my-suppress-vc-symlink-prompt)
 
 ;; Suppress compiler warnings from web-mode (deprecated stuff)
 (setq warning-suppress-types '((comp)))
+
+;; KEYBINDS -----------------
+
+;; recompile keybind
+(global-set-key (kbd "C-c r") 'recompile)
+
+;; USE-PACKAGES -------------------------
 
 ;; Ensure use-package is installed
 ;; Package manager
@@ -52,20 +60,12 @@
   (package-install 'use-package))
 (require 'use-package)
 
-;; Global and General keybinds -----------------
-
 ;; Multiple cursor keybinds
 (use-package multiple-cursors
   :ensure t
   :bind (("C-c n" . mc/mark-next-like-this)
 	 ("C-c p" . mc/mark-previous-like-this)
 	 ("C-c a" . mc/mark-all-like-this)))
-
-;; recompile keybind
-(global-set-key (kbd "C-c r") 'recompile)
-
-
-;; essentials-------------------------
 
 (use-package magit
   :ensure t) ;; git gui
@@ -78,6 +78,8 @@
 
 (use-package autothemer
   :ensure t) ;; theme manager
+;; Set up path for custom themes
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
 (use-package vterm
   :ensure t) ;; terminal emulator
@@ -107,7 +109,7 @@
         fzf/position-bottom t
         fzf/window-height 15))
 
-;; dev modes---------------------------
+;; MAJOR MODES ---------------------------
 
 (use-package web-mode
   :ensure t)
@@ -118,29 +120,17 @@
 (use-package elm-mode
   :ensure t)
 
-;; aesthetics -----------------------
+;; AESTHETICS  -----------------------
 
 (use-package nyan-mode
   :ensure t
   :config
   (nyan-mode 1))  ;; Enable nyan-mode
 
-;; Set up path for custom themes
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-
 ;; Load your theme — this should work if the file provides it
 (load-theme 'purple-haze t)
 
-;; custom commands ------------------------------------
-(defun hoogle (searchQuery)
-  "Opens a eww buffer in Hoogle on the searched query arguments"
-  (interactive "sSearch Hoogle:")
-  (eww (concat "https://hoogle.haskell.org/?hoogle=" searchQuery)))
-
-(defun hackage ()
-  "Opens a eww buffer in Hackage on the noscript mode search"
-  (interactive)
-  (eww "https://hackage.haskell.org/packages/noscript-search"))
+;; CUSTOM COMMANDS ------------------------------------
 
 ;; switch 2 buffers from vertical to horizontal split and vice versa
 (defun toggle-window-split ()
@@ -188,6 +178,10 @@
 
 (defalias 'swb 'swap-window-buffers)
 
+;; OTHER CONFIGS
+ 
+;; STUFF TO RUN AND ENABLE
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -198,7 +192,7 @@
    '(autothemer dired-video-thumbnail eglot elm-mode exec-path-from-shell
 		ffmpeg-player fzf haskell-mode lsp-mode magit
 		multiple-cursors nyan-mode pdf-tools php-mode seq
-		use-package vterm web-mode)))
+		use-package vterm web-mode zig-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
