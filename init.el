@@ -14,6 +14,18 @@
 
 (add-hook 'haskell-mode-hook 'eglot-ensure)
 
+(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup)
+
+(eval-after-load 'flycheck
+  '(flycheck-elm-setup))
+
+;; 2-second refresh rate on emacs equivalent of htop
+(setq proced-auto-update-flag t)
+(setq proced-auto-update-interval 2)
+
+(require 'flycheck-eglot)
+(global-flycheck-eglot-mode 1)
+
 ;; autocompletion on file searching in dired mode
 (ido-mode 1)
 (setq ido-show-dot-for-dired t) ;; enable entering current dir
@@ -81,8 +93,8 @@
   :ensure t)
 
 (use-package exec-path-from-shell
-  :ensure t)
-(when (memq window-system '(mac ns x))
+  :ensure t
+  :config
   (exec-path-from-shell-initialize))
 
 (use-package pdf-tools
@@ -235,13 +247,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(auth-source-save-behavior nil)
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
    '(autothemer beacon darktooth-theme dimmer dired-video-thumbnail eglot
-		elm-mode exec-path-from-shell ffmpeg-player focus fzf
+		elm-mode elsqlite exec-path-from-shell ffmpeg-player
+		flycheck-eglot flycheck-elm flycheck-haskell focus fzf
 		golden-ratio haskell-mode lsp-mode magit move-text
-		multiple-cursors nyan-mode pdf-tools
-		rainbow-delimiters seq use-package vterm web-mode)))
+		multiple-cursors nyan-mode pdf-tools php-mode
+		rainbow-delimiters seq use-package vterm web-mode
+		yaml-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
