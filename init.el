@@ -10,21 +10,11 @@
         ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
-;; EMACS SPECIFIC CONFIG ------------------
-
-(add-hook 'haskell-mode-hook 'eglot-ensure)
-
-(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup)
-
-(eval-after-load 'flycheck
-  '(flycheck-elm-setup))
+;; EMACS SPECIFIC CONFIG
 
 ;; 2-second refresh rate on emacs equivalent of htop
 (setq proced-auto-update-flag t)
 (setq proced-auto-update-interval 2)
-
-(require 'flycheck-eglot)
-(global-flycheck-eglot-mode 1)
 
 ;; autocompletion on file searching in dired mode
 (ido-mode 1)
@@ -70,6 +60,8 @@
 (require 'use-package)
 
 ;; EMACS ESSENTIALS
+
+
 
 ;; Multiple cursor keybinds
 (use-package multiple-cursors
@@ -143,11 +135,33 @@
 (use-package web-mode
   :ensure t)
 
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+(use-package eglot
+  :ensure t
+  :hook ((haskell-mode . eglot-ensure)
+         (elm-mode . eglot-ensure))
+  :config
+  (setq eglot-confirm-server-edits nil))
+
+(use-package flycheck-eglot
+  :ensure t
+  :after (flycheck eglot)
+  :config
+  (global-flycheck-eglot-mode 1))
+
 (use-package haskell-mode
-  :ensure t)
+  :ensure t
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 
 (use-package elm-mode
-  :ensure t)
+  :ensure t
+  :config
+  (eval-after-load 'flycheck
+    '(flycheck-elm-setup)))
 
 ;; AESTHETICS  -----------------------
 
@@ -247,16 +261,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(auth-source-save-behavior nil)
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(autothemer beacon darktooth-theme dimmer dired-video-thumbnail eglot
-		elm-mode elsqlite exec-path-from-shell ffmpeg-player
-		flycheck-eglot flycheck-elm flycheck-haskell focus fzf
-		golden-ratio haskell-mode lsp-mode magit move-text
-		multiple-cursors nyan-mode pdf-tools php-mode
-		rainbow-delimiters seq use-package vterm web-mode
-		yaml-mode)))
+   '(dimmer rainbow-delimiters darktooth-theme flycheck-eglot flycheck move-text golden-ratio beacon focus fzf multiple-cursors nyan-mode eglot elm-mode haskell-mode web-mode pdf-tools exec-path-from-shell vterm autothemer magit use-package)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
