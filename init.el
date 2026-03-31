@@ -153,15 +153,18 @@
   (global-flycheck-eglot-mode 1))
 
 (use-package haskell-mode
-  :ensure t
-  :config
-  (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
+  :ensure t)
+
+(use-package flycheck-haskell
+  :ensure t)
+(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup)
 
 (use-package elm-mode
-  :ensure t
-  :config
-  (eval-after-load 'flycheck
-    '(flycheck-elm-setup)))
+  :ensure t)
+
+(use-package flycheck-elm
+  :ensure t)
+(add-hook 'flycheck-mode-hook #'flycheck-elm-setup)
 
 ;; AESTHETICS  -----------------------
 
@@ -263,7 +266,7 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(dimmer rainbow-delimiters darktooth-theme flycheck-eglot flycheck move-text golden-ratio beacon focus fzf multiple-cursors nyan-mode eglot elm-mode haskell-mode web-mode pdf-tools exec-path-from-shell vterm autothemer magit use-package)))
+   '(flycheck-elm flycheck-haskell dimmer rainbow-delimiters darktooth-theme flycheck-eglot flycheck move-text golden-ratio beacon focus fzf multiple-cursors nyan-mode eglot elm-mode haskell-mode web-mode pdf-tools exec-path-from-shell vterm autothemer magit use-package)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
