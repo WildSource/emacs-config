@@ -1,6 +1,13 @@
+;;; init.el --- My emacs config -*- lexical-binding: t -*-
+
+;;; Commentary:
+
+;;; Code:
+
 ;; debian apt command to run before evaluating the config file
 ;;
-;; sudo apt update && sudo apt install -y git fzf build-essential cmake libtool-bin libvterm-dev libpoppler-glib-dev libpoppler-private-dev zlib1g-dev libpng-dev
+;; sudo apt update && sudo apt install -y git fzf build-essential cmake libtool-bin libvterm-dev libpoppler-glib-dev libpoppler-private-dev zlib1g-dev libpng-dev imagemagick qrencode
+;; install signal-cli on github
 
 ;; Initialize package system and add package archives
 ;; Melpa package repository
@@ -11,6 +18,9 @@
 (package-initialize)
 
 ;; EMACS SPECIFIC CONFIG
+
+;; org-mode
+(setq org-display-remote-inline-image t)
 
 ;; 2-second refresh rate on emacs equivalent of htop
 (setq proced-auto-update-flag t)
@@ -61,8 +71,6 @@
 
 ;; EMACS ESSENTIALS
 
-
-
 ;; Multiple cursor keybinds
 (use-package multiple-cursors
   :ensure t
@@ -92,7 +100,8 @@
 (use-package pdf-tools
   :ensure t
   :config
-  (pdf-tools-install))
+  (pdf-tools-install)
+  (add-hook 'pdf-view-mode-hook (lambda () (display-line-numbers-mode -1))))
 
 (use-package fzf
   :ensure t
@@ -166,6 +175,12 @@
   :ensure t)
 (add-hook 'flycheck-mode-hook #'flycheck-elm-setup)
 
+(use-package arduino-mode
+  :ensure t)
+
+(use-package arduino-cli-mode
+  :ensure t)
+
 ;; AESTHETICS  -----------------------
 
 (use-package darktooth-theme
@@ -189,6 +204,20 @@
   :config
   (nyan-mode 1))  ;; Enable nyan-mode
 
+;; STUFF
+
+;; PN is short for phone number
+;; It is the file containing it so that it's not
+;; hardcoded. Since the init.el is public on discord
+(use-package signel
+  :ensure t
+  :config
+  ;; REQUIRED: Your registered phone number
+  (setq signel-account (with-temp-buffer
+			 (insert-file-contents "~/PN")
+			 (buffer-string)))
+  (setq signel-command "/usr/local/bin/signal-cli"))
+
 ;; KEYBINDS -----------------
 
 (global-set-key (kbd "C-c i") 'open-init)
@@ -202,7 +231,27 @@
   (interactive)
   (find-file "/home/wildsource/emacs-config/init.el"))
 
-;; switch 2 buffers from vertical to horizontal split and vice versa
+(defun new-package (package-name short-summary)
+  "Create elisp file in /lisp with header and footer.
+
+PACKAGE-NAME lowercase string.
+
+SHORT-SUMMARY preferably lowercase but not mandatory.
+in the bottom example.
+
+';;; example.el --- SHORT-SUMMARY -*- lexical-binding: t; -*-'."
+  (interactive (list (read-string "Enter package name: ")
+		     (read-string "Enter short summary: ")))
+  (let ((filename (format "lisp/%s.el" package-name))
+	(header (format ";;; %s.el --- %s -*- lexical-binding: t; -*-" package-name short-summary))
+	(footer (format "(provide '%s)\n;;; %s.el ends here" package-name package-name)))
+    (with-temp-file filename
+      (insert header)
+      (insert ";;; Commentary:")
+      (insert ";;; Code:")
+      (insert footer)))
+  (message "(New package was created)"))
+    
 (defun toggle-window-split ()
   "Toggle between vertical and horizontal split with 2 windows."
   (interactive)
@@ -266,7 +315,11 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(flycheck-elm flycheck-haskell dimmer rainbow-delimiters darktooth-theme flycheck-eglot flycheck move-text golden-ratio beacon focus fzf multiple-cursors nyan-mode eglot elm-mode haskell-mode web-mode pdf-tools exec-path-from-shell vterm autothemer magit use-package)))
+   '(arduino-cli-mode arduino-mode beacon darktooth-theme dimmer elm-mode
+		      exec-path-from-shell flycheck-eglot flycheck-elm
+		      flycheck-haskell focus fzf golden-ratio magit
+		      move-text multiple-cursors nyan-mode pdf-tools
+		      rainbow-delimiters signel vterm web-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
