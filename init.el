@@ -6,7 +6,7 @@
 
 ;; debian apt command to run before evaluating the config file
 ;;
-;; sudo apt update && sudo apt install -y git fzf build-essential cmake libtool-bin libvterm-dev libpoppler-glib-dev libpoppler-private-dev zlib1g-dev libpng-dev imagemagick qrencode
+;; sudo apt update && sudo apt install -y git fzf build-essential cmake libtool-bin libvterm-dev libpoppler-glib-dev libpoppler-private-dev zlib1g-dev libpng-dev imagemagick qrencode texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
 ;; install signal-cli on github
 
 ;; Initialize package system and add package archives
@@ -20,7 +20,11 @@
 ;; EMACS SPECIFIC CONFIG
 
 ;; org-mode
-(setq org-display-remote-inline-image t)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((sql . t)
+   (ruby . t)))
+(setq org-image-actual-width nil)
 
 ;; 2-second refresh rate on emacs equivalent of htop
 (setq proced-auto-update-flag t)
@@ -100,7 +104,7 @@
 (use-package pdf-tools
   :ensure t
   :config
-  (pdf-tools-install)
+  (pdf-tools-install :no-query)
   (add-hook 'pdf-view-mode-hook (lambda () (display-line-numbers-mode -1))))
 
 (use-package fzf
