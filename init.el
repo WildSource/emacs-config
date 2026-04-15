@@ -23,7 +23,8 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((sql . t)
-   (ruby . t)))
+   (ruby . t)
+   (haskell . t)))
 (setq org-image-actual-width nil)
 
 ;; 2-second refresh rate on emacs equivalent of htop
@@ -106,6 +107,11 @@
   :config
   (pdf-tools-install :no-query)
   (add-hook 'pdf-view-mode-hook (lambda () (display-line-numbers-mode -1))))
+
+(use-package ivy-hoogle
+  :ensure t
+  :config
+  (ivy-mode 1))
 
 (use-package fzf
   :ensure t
@@ -221,6 +227,7 @@
 			 (insert-file-contents "~/PN")
 			 (buffer-string)))
   (setq signel-command "/usr/local/bin/signal-cli"))
+(signel-start)
 
 ;; KEYBINDS -----------------
 
@@ -319,11 +326,13 @@ in the bottom example.
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(arduino-cli-mode arduino-mode beacon darktooth-theme dimmer elm-mode
-		      exec-path-from-shell flycheck-eglot flycheck-elm
-		      flycheck-haskell focus fzf golden-ratio magit
+   '(arduino-cli-mode arduino-mode beacon chatgpt-shell darktooth-theme
+		      dimmer elm-mode exec-path-from-shell
+		      flycheck-eglot flycheck-elm flycheck-haskell
+		      focus fzf golden-ratio ivy-hoogle magit
 		      move-text multiple-cursors nyan-mode pdf-tools
-		      rainbow-delimiters signel vterm web-mode)))
+		      rainbow-delimiters signel vterm web-mode))
+ '(safe-local-variable-directories '("/home/wildsource/Code/goonics/")))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

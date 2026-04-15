@@ -2,7 +2,19 @@
 
 ;;; Commentary: For now ohm calculator
 
-;; Basic vol
+;; Ohm's Law
+;; R = V / I
+
+;; Voltage Formula
+;; V = I * R
+
+;; Current Formula
+;; I = V / R
+
+;; Where:
+;; R - resistance
+;; V - voltage
+;; I - Current
 
 ;;; Code:
 
