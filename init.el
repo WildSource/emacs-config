@@ -6,8 +6,8 @@
 
 ;; debian apt command to run before evaluating the config file
 ;;
-;; sudo apt update && sudo apt install -y git fzf build-essential cmake libtool-bin libvterm-dev libpoppler-glib-dev libpoppler-private-dev zlib1g-dev libpng-dev imagemagick qrencode texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
-;; install signal-cli on github
+;; sudo apt update && sudo apt install -y git fzf build-essential cmake libtool-bin libvterm-dev libpoppler-glib-dev libpoppler-private-dev zlib1g-dev libpng-dev imagemagick qrencode texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra	
+;; l-cli on github
 
 ;; Initialize package system and add package archives
 ;; Melpa package repository
@@ -326,6 +326,7 @@ in the bottom example.
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
+<<<<<<< Updated upstream
    '(arduino-cli-mode arduino-mode beacon chatgpt-shell darktooth-theme
 		      dimmer elm-mode exec-path-from-shell
 		      flycheck-eglot flycheck-elm flycheck-haskell
@@ -333,6 +334,16 @@ in the bottom example.
 		      move-text multiple-cursors nyan-mode pdf-tools
 		      rainbow-delimiters signel vterm web-mode))
  '(safe-local-variable-directories '("/home/wildsource/Code/goonics/")))
+=======
+   '(arduino-cli-mode arduino-mode autothemer beacon darktooth-theme
+		      dimmer dired-video-thumbnail eglot elm-mode
+		      exec-path-from-shell ffmpeg-player flycheck
+		      flycheck-eglot flycheck-elm flycheck-haskell
+		      focus fzf golden-ratio haskell-mode lsp-mode
+		      magit move-text multiple-cursors nyan-mode
+		      pdf-tools rainbow-delimiters seq signel
+		      use-package vterm web-mode)))
+>>>>>>> Stashed changes
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
