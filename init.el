@@ -27,10 +27,6 @@
    (haskell . t)))
 (setq org-image-actual-width nil)
 
-;; 2-second refresh rate on emacs equivalent of htop
-(setq proced-auto-update-flag t)
-(setq proced-auto-update-interval 2)
-
 ;; autocompletion on file searching in dired mode
 (ido-mode 1)
 (setq ido-show-dot-for-dired t) ;; enable entering current dir
@@ -214,21 +210,6 @@
   :config
   (nyan-mode 1))  ;; Enable nyan-mode
 
-;; STUFF
-
-;; PN is short for phone number
-;; It is the file containing it so that it's not
-;; hardcoded. Since the init.el is public on discord
-(use-package signel
-  :ensure t
-  :config
-  ;; REQUIRED: Your registered phone number
-  (setq signel-account (with-temp-buffer
-			 (insert-file-contents "~/PN")
-			 (buffer-string)))
-  (setq signel-command "/usr/local/bin/signal-cli"))
-(signel-start)
-
 ;; KEYBINDS -----------------
 
 (global-set-key (kbd "C-c i") 'open-init)
@@ -318,38 +299,5 @@ in the bottom example.
 ;;(load-theme 'purple-haze t)
 
 ;; BELOW IS MANAGED BY EMACS ITSELF
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
- '(package-selected-packages
-<<<<<<< Updated upstream
-   '(arduino-cli-mode arduino-mode beacon chatgpt-shell darktooth-theme
-		      dimmer elm-mode exec-path-from-shell
-		      flycheck-eglot flycheck-elm flycheck-haskell
-		      focus fzf golden-ratio ivy-hoogle magit
-		      move-text multiple-cursors nyan-mode pdf-tools
-		      rainbow-delimiters signel vterm web-mode))
- '(safe-local-variable-directories '("/home/wildsource/Code/goonics/")))
-=======
-   '(arduino-cli-mode arduino-mode autothemer beacon darktooth-theme
-		      dimmer dired-video-thumbnail eglot elm-mode
-		      exec-path-from-shell ffmpeg-player flycheck
-		      flycheck-eglot flycheck-elm flycheck-haskell
-		      focus fzf golden-ratio haskell-mode lsp-mode
-		      magit move-text multiple-cursors nyan-mode
-		      pdf-tools rainbow-delimiters seq signel
-		      use-package vterm web-mode)))
->>>>>>> Stashed changes
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 (message "All good !")
