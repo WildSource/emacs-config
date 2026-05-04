@@ -106,6 +106,7 @@
 
 (use-package ivy-hoogle
   :ensure t
+  :bind ("C-c h" . ivy-hoogle)
   :config
   (ivy-mode 1))
 
@@ -188,6 +189,9 @@
   :ensure t)
 
 ;; AESTHETICS  -----------------------
+
+(use-package gameoflife
+  :ensure t)
 
 (use-package darktooth-theme
   :ensure t)
@@ -300,4 +304,30 @@ in the bottom example.
 
 ;; BELOW IS MANAGED BY EMACS ITSELF
 
+<<<<<<< Updated upstream
+=======
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
+ '(package-selected-packages
+   '(arduino-cli-mode arduino-mode beacon chatgpt-shell darktooth-theme
+		      dimmer elm-mode exec-path-from-shell
+		      flycheck-eglot flycheck-elm flycheck-haskell
+		      focus fzf gameoflife golden-ratio ivy-hoogle
+		      magit move-text multiple-cursors nyan-mode
+		      pdf-tools rainbow-delimiters signel vterm
+		      web-mode))
+ '(safe-local-variable-directories '("/home/wildsource/Code/goonics/")))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+>>>>>>> Stashed changes
 (message "All good !")
