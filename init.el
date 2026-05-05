@@ -26,6 +26,7 @@
    (ruby . t)
    (haskell . t)))
 (setq org-image-actual-width nil)
+(setq org-agenda-files '("~/emacs-notes/todo"))
 
 ;; autocompletion on file searching in dired mode
 (ido-mode 1)
@@ -147,39 +148,32 @@
 
 ;; MAJOR MODES ---------------------------
 
-(use-package web-mode
-  :ensure t)
-
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode))
-
 (use-package eglot
   :ensure t
   :hook ((haskell-mode . eglot-ensure)
-         (elm-mode . eglot-ensure))
+         (elm-mode . eglot-ensure)
+	 (dart-mode . eglot-ensure)
+	 (arduino-mode . eglot-ensure))
   :config
   (setq eglot-confirm-server-edits nil))
 
-(use-package flycheck-eglot
-  :ensure t
-  :after (flycheck eglot)
-  :config
-  (global-flycheck-eglot-mode 1))
+(use-package web-mode
+  :ensure t)
 
 (use-package haskell-mode
   :ensure t)
 
-(use-package flycheck-haskell
+(use-package dart-mode
   :ensure t)
-(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup)
+
+(use-package flutter
+  :ensure t
+  :after dart-mode
+  :bind (:map dart-mode-map
+              ("C-M-x" . #'flutter-run-or-hot-reload)))
 
 (use-package elm-mode
   :ensure t)
-
-(use-package flycheck-elm
-  :ensure t)
-(add-hook 'flycheck-mode-hook #'flycheck-elm-setup)
 
 (use-package arduino-mode
   :ensure t)
@@ -216,6 +210,8 @@
 
 ;; recompile keybind
 (global-set-key (kbd "C-c r") 'recompile)
+
+(global-set-key (kbd "C-c h") 'ivy-hoogle)
 
 ;; CUSTOM COMMANDS ------------------------------------
 
@@ -301,3 +297,22 @@ in the bottom example.
 ;; BELOW IS MANAGED BY EMACS ITSELF
 
 (message "All good !")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(0blayout angular-mode arduino-cli-mode arduino-mode beacon
+	      darktooth-theme dimmer dired-video-thumbnail elm-mode
+	      exec-path-from-shell ffmpeg-player flutter
+	      flycheck-eglot flycheck-elm flycheck-haskell focus fzf
+	      gdscript-mode golden-ratio ivy-hoogle magit move-text
+	      multiple-cursors nasm-mode nyan-mode pdf-tools
+	      rainbow-delimiters signel slime vterm web-mode)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
