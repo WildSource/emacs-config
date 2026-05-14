@@ -32,6 +32,9 @@
 (ido-mode 1)
 (setq ido-show-dot-for-dired t) ;; enable entering current dir
 
+;; Enable abbreviations (expandable macros basically)
+(abbrev-mode 1)
+
 ;; Remove annoying ass bell
 (setq ring-bell-function 'ignore)
 
@@ -306,13 +309,13 @@ in the bottom example.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(0blayout angular-mode arduino-cli-mode arduino-mode beacon
-	      darktooth-theme dimmer dired-video-thumbnail elm-mode
-	      exec-path-from-shell ffmpeg-player flutter
-	      flycheck-eglot flycheck-elm flycheck-haskell focus fzf
-	      gameoflife gdscript-mode golden-ratio ivy-hoogle magit
-	      move-text multiple-cursors nasm-mode nyan-mode pdf-tools
-	      rainbow-delimiters signel slime vterm web-mode)))
+   '(arduino-cli-mode arduino-mode beacon chatgpt-shell darktooth-theme
+		      dart-mode dimmer elm-mode exec-path-from-shell
+		      flutter flycheck-eglot flycheck-elm
+		      flycheck-haskell focus fzf gameoflife
+		      golden-ratio ivy-hoogle magit move-text
+		      multiple-cursors nyan-mode pdf-tools
+		      rainbow-delimiters signel vterm web-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
