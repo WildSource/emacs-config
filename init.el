@@ -22,7 +22,8 @@
 ;; org-mode
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((sql . t)
+ '((C . t)
+   (sql . t)
    (ruby . t)
    (haskell . t)))
 (setq org-image-actual-width nil)
