@@ -34,7 +34,7 @@
 (setq ido-show-dot-for-dired t) ;; enable entering current dir
 
 ;; Enable abbreviations (expandable macros basically)
-(abbrev-mode 1)
+(setq-default abbrev-mode t)
 
 ;; Remove annoying ass bell
 (setq ring-bell-function 'ignore)
@@ -131,6 +131,9 @@
         fzf/window-height 15))
 
 ;; QUALITY OF LIFE
+
+(use-package chronos
+  :ensure t)
 
 (use-package focus
   :ensure t
@@ -310,13 +313,14 @@ in the bottom example.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(arduino-cli-mode arduino-mode beacon chatgpt-shell darktooth-theme
-		      dart-mode dimmer elm-mode exec-path-from-shell
-		      flutter flycheck-eglot flycheck-elm
-		      flycheck-haskell focus fzf gameoflife
-		      golden-ratio ivy-hoogle magit move-text
-		      multiple-cursors nyan-mode pdf-tools
-		      rainbow-delimiters signel vterm web-mode)))
+   '(arduino-cli-mode arduino-mode beacon chatgpt-shell chronos
+		      darktooth-theme dart-mode dimmer elm-mode
+		      exec-path-from-shell flutter flycheck-eglot
+		      flycheck-elm flycheck-haskell focus fzf
+		      gameoflife golden-ratio ivy-hoogle java-mode
+		      magit move-text multiple-cursors nyan-mode
+		      pdf-tools rainbow-delimiters signel vterm
+		      web-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
