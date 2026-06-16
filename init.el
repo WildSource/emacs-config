@@ -98,6 +98,9 @@
 (use-package vterm
   :ensure t)
 
+(use-package consult
+  :ensure t)
+
 (use-package exec-path-from-shell
   :ensure t
   :config
@@ -161,6 +164,7 @@
   :hook ((haskell-mode . eglot-ensure)
          (elm-mode . eglot-ensure)
 	 (dart-mode . eglot-ensure)
+	 (java-mode . eglot-ensure)
 	 (arduino-mode . eglot-ensure))
   :config
   (setq eglot-confirm-server-edits nil))
@@ -188,6 +192,23 @@
 
 (use-package arduino-cli-mode
   :ensure t)
+
+(use-package plantuml-mode
+  :ensure t)
+(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
+(setq plantuml-jar-path "~/plantuml.jar")
+(setq plantuml-default-exec-mode 'jar)
+(setq plantuml-output-type "svg")
+
+(defun export-plantuml-svg ()
+  "Execute shell command of plantuml.jar to export to svg of opened .plantuml file in current buffer."
+  (interactive)
+  (let
+      ((plantuml-exec-path "~/plantuml.jar"))
+    (shell-command (format "java -jar %s -tsvg %s" plantuml-exec-path (buffer-file-name)))))
+
+(with-eval-after-load 'plantuml-mode
+  (define-key plantuml-mode-map (kbd "C-c C-o") 'export-plantuml-svg))
 
 ;; AESTHETICS  -----------------------
 
@@ -313,13 +334,14 @@ in the bottom example.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(arduino-cli-mode arduino-mode beacon chatgpt-shell chronos
-		      darktooth-theme dart-mode dimmer elm-mode
+   '(arduino-cli-mode arduino-mode beacon chatgpt-shell chronos consult
+		      darktooth-theme dart-mode dimmer elm-mode empv
 		      exec-path-from-shell flutter flycheck-eglot
 		      flycheck-elm flycheck-haskell focus fzf
-		      gameoflife golden-ratio ivy-hoogle java-mode
-		      magit move-text multiple-cursors nyan-mode
-		      pdf-tools rainbow-delimiters signel vterm
+		      gameoflife golden-ratio google-maps ivy-hoogle
+		      java-mode magit move-text multiple-cursors
+		      nnreddit nntwitter nyan-mode pdf-tools
+		      plantuml-mode rainbow-delimiters signel vterm
 		      web-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
