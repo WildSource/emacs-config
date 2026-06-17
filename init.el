@@ -165,6 +165,7 @@
          (elm-mode . eglot-ensure)
 	 (dart-mode . eglot-ensure)
 	 (java-mode . eglot-ensure)
+	 (csharp-mode . eglot-ensure)
 	 (arduino-mode . eglot-ensure))
   :config
   (setq eglot-confirm-server-edits nil))
@@ -185,6 +186,12 @@
               ("C-M-x" . #'flutter-run-or-hot-reload)))
 
 (use-package elm-mode
+  :ensure t)
+
+(use-package squirrel-mode
+  :ensure t)
+
+(use-package csharp-mode
   :ensure t)
 
 (use-package arduino-mode
@@ -211,9 +218,6 @@
   (define-key plantuml-mode-map (kbd "C-c C-o") 'export-plantuml-svg))
 
 ;; AESTHETICS  -----------------------
-
-(use-package gameoflife
-  :ensure t)
 
 (use-package darktooth-theme
   :ensure t)
@@ -334,22 +338,17 @@ in the bottom example.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(arduino-cli-mode arduino-mode beacon chatgpt-shell chronos consult
-		      darktooth-theme dart-mode dimmer elm-mode empv
-		      exec-path-from-shell flutter flycheck-eglot
-		      flycheck-elm flycheck-haskell focus fzf
-		      gameoflife golden-ratio google-maps ivy-hoogle
-		      java-mode magit move-text multiple-cursors
-		      nnreddit nntwitter nyan-mode pdf-tools
-		      plantuml-mode rainbow-delimiters signel vterm
-		      web-mode)))
+   '(0blayout angular-mode arduino-cli-mode arduino-mode beacon chronos
+	      consult darktooth-theme dart-mode dimmer
+	      dired-video-thumbnail elm-mode exec-path-from-shell
+	      ffmpeg-player flutter flycheck-eglot flycheck-elm
+	      flycheck-haskell focus fzf gdscript-mode golden-ratio
+	      ivy-hoogle magit move-text multiple-cursors nasm-mode
+	      nyan-mode pdf-tools plantuml-mode rainbow-delimiters
+	      signel slime squirrel-mode vterm web-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-(message "All good !")
-(provide 'init)
-;;;
