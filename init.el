@@ -135,9 +135,6 @@
 
 ;; QUALITY OF LIFE
 
-(use-package chronos
-  :ensure t)
-
 (use-package focus
   :ensure t
   :config
@@ -152,11 +149,6 @@
   :config
   (golden-ratio-mode 1))
 
-(use-package move-text
-  :ensure t
-  :config
-  (move-text-default-bindings))
-
 ;; MAJOR MODES ---------------------------
 
 (use-package eglot
@@ -165,7 +157,6 @@
          (elm-mode . eglot-ensure)
 	 (dart-mode . eglot-ensure)
 	 (java-mode . eglot-ensure)
-	 (csharp-mode . eglot-ensure)
 	 (arduino-mode . eglot-ensure))
   :config
   (setq eglot-confirm-server-edits nil))
@@ -188,12 +179,6 @@
 (use-package elm-mode
   :ensure t)
 
-(use-package squirrel-mode
-  :ensure t)
-
-(use-package csharp-mode
-  :ensure t)
-
 (use-package arduino-mode
   :ensure t)
 
@@ -207,25 +192,10 @@
 (setq plantuml-default-exec-mode 'jar)
 (setq plantuml-output-type "svg")
 
-(defun export-plantuml-svg ()
-  "Execute shell command of plantuml.jar to export to svg of opened .plantuml file in current buffer."
-  (interactive)
-  (let
-      ((plantuml-exec-path "~/plantuml.jar"))
-    (shell-command (format "java -jar %s -tsvg %s" plantuml-exec-path (buffer-file-name)))))
-
-(with-eval-after-load 'plantuml-mode
-  (define-key plantuml-mode-map (kbd "C-c C-o") 'export-plantuml-svg))
-
 ;; AESTHETICS  -----------------------
 
 (use-package darktooth-theme
   :ensure t)
-
-(use-package rainbow-delimiters
-  :ensure t
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package dimmer
   :ensure t
@@ -243,92 +213,32 @@
 ;; KEYBINDS -----------------
 
 (global-set-key (kbd "C-c i") 'open-init)
-
-;; recompile keybind
-(global-set-key (kbd "C-c r") 'recompile)
-
 (global-set-key (kbd "C-c h") 'ivy-hoogle)
 
 ;; CUSTOM COMMANDS ------------------------------------
 
+(defun export-plantuml-svg ()
+  "Execute shell command of plantuml.jar to export to svg of opened .plantuml file in current buffer."
+  (interactive)
+  (let
+      ((plantuml-exec-path "~/plantuml.jar"))
+    (shell-command (format "java -jar %s -tsvg %s" plantuml-exec-path (buffer-file-name)))))
+
+(with-eval-after-load 'plantuml-mode
+  (define-key plantuml-mode-map (kbd "C-c C-o") 'export-plantuml-svg))
+
 (defun open-init ()
   (interactive)
   (find-file "/home/wildsource/emacs-config/init.el"))
-
-(defun new-package (package-name short-summary)
-  "Create elisp file in /lisp with header and footer.
-
-PACKAGE-NAME lowercase string.
-
-SHORT-SUMMARY preferably lowercase but not mandatory.
-in the bottom example.
-
-';;; example.el --- SHORT-SUMMARY -*- lexical-binding: t; -*-'."
-  (interactive (list (read-string "Enter package name: ")
-		     (read-string "Enter short summary: ")))
-  (let ((filename (format "lisp/%s.el" package-name))
-	(header (format ";;; %s.el --- %s -*- lexical-binding: t; -*-" package-name short-summary))
-	(footer (format "(provide '%s)\n;;; %s.el ends here" package-name package-name)))
-    (with-temp-file filename
-      (insert header)
-      (insert ";;; Commentary:")
-      (insert ";;; Code:")
-      (insert footer)))
-  (message "(New package was created)"))
     
-(defun toggle-window-split ()
-  "Toggle between vertical and horizontal split with 2 windows."
-  (interactive)
-  (if (= (count-windows) 2)
-      (let* ((this-win-buffer (window-buffer))
-             (next-win-buffer (window-buffer (next-window)))
-             (this-win-edges (window-edges (selected-window)))
-             (next-win-edges (window-edges (next-window)))
-             (split-vertically-p
-              (= (car this-win-edges)
-                 (car next-win-edges)))
-             (splitter
-              (if split-vertically-p
-                  #'split-window-horizontally
-                #'split-window-vertically)))
-        (delete-other-windows)
-        (let ((first-window (selected-window)))
-          (funcall splitter)
-          (if split-vertically-p
-              (set-window-buffer (next-window) this-win-buffer)
-            (set-window-buffer (next-window) next-win-buffer))
-          (set-window-buffer first-window
-                             (if split-vertically-p
-                                 next-win-buffer
-                               this-win-buffer)))
-        (other-window 1))))
-
-(defalias 'tws 'toggle-window-split)
-
-;; swap buffers left to right and vice versa for both vertical and horizontal split
-
-(defun swap-window-buffers ()
-  "Swap buffers between two windows."
-  (interactive)
-  (when (= (count-windows) 2)
-    (let* ((win1 (selected-window))
-           (win2 (next-window))
-           (buf1 (window-buffer win1))
-           (buf2 (window-buffer win2)))
-      (set-window-buffer win1 buf2)
-      (set-window-buffer win2 buf1)
-      (select-window win2))))
-
-(defalias 'swb 'swap-window-buffers)
- 
 ;; STUFF TO RUN AND ENABLE
 
 (electric-pair-mode 1)
 
 ;; Load your theme — this should work if the file provides it
-(load-theme 'darktooth t)
+;;(load-theme 'darktooth t)
 ;;(load-theme 'automata t)
-;;(load-theme 'purple-haze t)
+(load-theme 'purple-haze t)
 
 ;; BELOW IS MANAGED BY EMACS ITSELF
 
