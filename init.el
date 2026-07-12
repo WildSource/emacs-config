@@ -248,14 +248,15 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(0blayout angular-mode arduino-cli-mode arduino-mode beacon chronos
-	      consult darktooth-theme dart-mode dimmer
-	      dired-video-thumbnail elm-mode exec-path-from-shell
-	      ffmpeg-player flutter flycheck-eglot flycheck-elm
-	      flycheck-haskell focus fzf gdscript-mode golden-ratio
-	      ivy-hoogle magit move-text multiple-cursors nasm-mode
-	      nyan-mode pdf-tools plantuml-mode rainbow-delimiters
-	      signel slime squirrel-mode vterm web-mode)))
+   '(arduino-cli-mode arduino-mode beacon chatgpt-shell chronos consult
+		      darktooth-theme dart-mode dimmer elm-mode empv
+		      exec-path-from-shell flutter flycheck-eglot
+		      flycheck-elm flycheck-haskell focus fzf
+		      gameoflife golden-ratio google-maps ivy-hoogle
+		      magit move-text multiple-cursors nnreddit
+		      nntwitter nyan-mode pdf-tools plantuml-mode
+		      rainbow-delimiters signel squirrel-mode vterm
+		      web-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
