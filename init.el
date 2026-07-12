@@ -23,6 +23,9 @@
 (add-to-list 'default-frame-alist
 	     '(font . "TempleOS-20"))
 
+;; abbrev
+(setq abbrev-file-name "~/.emacs.d/abbrev_defs")
+
 ;; org-mode
 (org-babel-do-load-languages
  'org-babel-load-languages
