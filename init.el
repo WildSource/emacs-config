@@ -21,10 +21,7 @@
 
 ;; font
 (add-to-list 'default-frame-alist
-	     '(font . "TempleOS-150"))
-
-;; Change font size
-(set-face-attribute 'default nil :height 150)
+	     '(font . "TempleOS-20"))
 
 ;; org-mode
 (org-babel-do-load-languages
@@ -59,7 +56,7 @@
 
 ;; Set initial buffer to *scratch*
 (setq initial-buffer-choice t)
-p
+
 ;; remove symlink prompt for splash and init.el
 (defun my-suppress-vc-symlink-prompt ()
   (when (or (string-equal (file-truename buffer-file-name) "~/.emacs.d/splash")
