@@ -20,8 +20,13 @@
 ;; EMACS SPECIFIC CONFIG
 
 ;; font
-(add-to-list 'default-frame-alist
-	     '(font . "TempleOS-20"))
+(let* ((sys-name (system-name))
+       (laptop-font "TempleOS-12")
+       (desktop-font "TempleOS-20")
+       (chosen-font (if (string= sys-name "WildSourcePC")
+                         desktop-font
+                       laptop-font)))
+  (add-to-list 'default-frame-alist (cons 'font chosen-font)))
 
 ;; abbrev
 (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
