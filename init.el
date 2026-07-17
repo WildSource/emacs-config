@@ -52,8 +52,8 @@
 (setq ring-bell-function 'ignore)
 
 ;; Make buffer transparent
-(set-frame-parameter nil 'alpha-background 70)
-(add-to-list 'default-frame-alist '(alpha-background . 70))
+(when (string= (system-name) "WildSourcePC")
+  (add-to-list 'default-frame-alist '(alpha-background . 70)))
 
 ;; Remove tool-bar
 (tool-bar-mode -1)
@@ -245,9 +245,9 @@
 (electric-pair-mode 1)
 
 ;; Load your theme — this should work if the file provides it
-;;(load-theme 'darktooth t)
+(load-theme 'darktooth t)
 ;;(load-theme 'automata t)
-(load-theme 'purple-haze t)
+;;(load-theme 'purple-haze t)
 
 ;; BELOW IS MANAGED BY EMACS ITSELF
 
