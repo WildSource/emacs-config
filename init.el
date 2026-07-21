@@ -4,10 +4,6 @@
 
 ;;; Code:
 
-;; debian apt command to run before evaluating the config file
-;;
-;; sudo apt update && sudo apt install -y git fzf build-essential cmake libtool-bin libvterm-dev libpoppler-glib-dev libpoppler-private-dev zlib1g-dev libpng-dev imagemagick qrencode texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra	
-;; l-cli on github
 
 ;; Initialize package system and add package archives
 ;; Melpa package repository
@@ -20,10 +16,11 @@
 ;; EMACS SPECIFIC CONFIG
 
 ;; font
+;; Add ttf file to /usr/local/share/fonts and run fc-cache -f -v
 (let* ((sys-name (system-name))
        (laptop-font "TempleOS-12")
        (desktop-font "TempleOS-20")
-       (chosen-font (if (string= sys-name "WildSourcePC")
+       (chosen-font (if (string= sys-name "tux")
                          desktop-font
                        laptop-font)))
   (add-to-list 'default-frame-alist (cons 'font chosen-font)))
@@ -52,7 +49,7 @@
 (setq ring-bell-function 'ignore)
 
 ;; Make buffer transparent
-(when (string= (system-name) "WildSourcePC")
+(when (string= (system-name) "tux")
   (add-to-list 'default-frame-alist '(alpha-background . 70)))
 
 ;; Remove tool-bar
@@ -256,16 +253,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(arduino-cli-mode arduino-mode beacon chatgpt-shell chronos consult
-		      darktooth-theme dart-mode dimmer elm-mode empv
-		      exec-path-from-shell flutter flycheck-eglot
-		      flycheck-elm flycheck-haskell focus fzf
-		      gameoflife golden-ratio google-maps ivy-hoogle
-		      magit move-text multiple-cursors nnreddit
-		      nntwitter nyan-mode pdf-tools plantuml-mode
-		      rainbow-delimiters signel squirrel-mode vterm
-		      web-mode)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
