@@ -235,7 +235,7 @@
 
 (defun open-init ()
   (interactive)
-  (find-file "/home/wildsource/emacs-config/init.el"))
+  (find-file "~/emacs-config/init.el"))
     
 ;; STUFF TO RUN AND ENABLE
 
