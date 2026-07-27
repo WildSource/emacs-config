@@ -236,10 +236,21 @@
 (defun open-init ()
   (interactive)
   (find-file "~/emacs-config/init.el"))
+
+(defun battery-notification ()  
+  "If battery power under 20% notifies user through emacs"
+  (let* ((battery-power-str (string-trim (shell-command-to-string "cat /sys/class/power_supply/BAT0/capacity")))
+	(battery-power-num (string-to-number battery-power-str)))
+    (when (<= battery-power-num 20)
+	(message "Careful ! Your battery is at %s%%" battery-power-str))))
     
 ;; STUFF TO RUN AND ENABLE
 
 (electric-pair-mode 1)
+(when (not (string-equal (system-name) "tux"))
+   (run-with-timer 1800 1800 #'battery-notification)
+   (message "battery notification daemon started !"))
+
 
 ;; Load your theme — this should work if the file provides it
 (load-theme 'darktooth t)
