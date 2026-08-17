@@ -237,18 +237,19 @@
   (interactive)
   (find-file "~/emacs-config/init.el"))
 
-(defun battery-notification ()  
+(defun battery-notification ()
   "If battery power under 20% notifies user through emacs"
   (let* ((battery-power-str (string-trim (shell-command-to-string "cat /sys/class/power_supply/BAT0/capacity")))
-	(battery-power-num (string-to-number battery-power-str)))
+	 (battery-power-num (string-to-number battery-power-str))
+	 (formatted-message (concat "Careful ! Your battery is at " battery-power-str)))
     (when (<= battery-power-num 20)
-	(message "Careful ! Your battery is at %s%%" battery-power-str))))
+            (shell-command (format "notify-send \"%s\"\"" formatted-message)))))
     
 ;; STUFF TO RUN AND ENABLE
 
 (electric-pair-mode 1)
 (when (not (string-equal (system-name) "tux"))
-   (run-with-timer 1800 1800 #'battery-notification)
+   (run-with-timer 300 300 #'battery-notification)
    (message "battery notification daemon started !"))
 
 
@@ -264,7 +265,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(arduino-cli-mode arduino-mode beacon chatgpt-shell chronos consult
+		      darktooth-theme dart-mode dimmer elm-mode empv
+		      exec-path-from-shell flutter flycheck-eglot
+		      flycheck-elm flycheck-haskell focus fzf
+		      gameoflife golden-ratio google-maps ivy-hoogle
+		      magit move-text multiple-cursors nnreddit
+		      nntwitter nyan-mode pdf-tools plantuml-mode
+		      rainbow-delimiters signel squirrel-mode vterm
+		      web-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
