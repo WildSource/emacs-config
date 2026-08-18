@@ -175,9 +175,6 @@
 
 ;; AESTHETICS  -----------------------
 
-(use-package darktooth-theme
-  :ensure t)
-
 (use-package dimmer
   :ensure t
   :config
@@ -219,30 +216,7 @@
 
 
 ;; Load your theme — this should work if the file provides it
-(load-theme 'darktooth t)
 ;;(load-theme 'automata t)
-;;(load-theme 'purple-haze t)
+(load-theme 'purple-haze t)
 
 ;; BELOW IS MANAGED BY EMACS ITSELF
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(arduino-cli-mode arduino-mode beacon chatgpt-shell chronos consult
-		      darktooth-theme dart-mode dimmer elm-mode empv
-		      exec-path-from-shell flutter flycheck-eglot
-		      flycheck-elm flycheck-haskell focus fzf
-		      gameoflife golden-ratio google-maps ivy-hoogle
-		      magit move-text multiple-cursors nnreddit
-		      nntwitter nyan-mode pdf-tools plantuml-mode
-		      rainbow-delimiters signel squirrel-mode vterm
-		      web-mode)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
