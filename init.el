@@ -4,7 +4,6 @@
 
 ;;; Code:
 
-
 ;; Initialize package system and add package archives
 ;; Melpa package repository
 (require 'package)
@@ -48,10 +47,6 @@
 ;; Remove annoying ass bell
 (setq ring-bell-function 'ignore)
 
-;; Make buffer transparent
-(when (string= (system-name) "tux")
-  (add-to-list 'default-frame-alist '(alpha-background . 70)))
-
 ;; Remove tool-bar
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -61,13 +56,6 @@
 
 ;; Set initial buffer to *scratch*
 (setq initial-buffer-choice t)
-
-;; remove symlink prompt for splash and init.el
-(defun my-suppress-vc-symlink-prompt ()
-  (when (or (string-equal (file-truename buffer-file-name) "~/.emacs.d/splash")
-	    (string-equal (file-truename buffer-file-name) "~/.emacs.d/init.el")))
-    (setq-local vc-follow-symlinks t))
-(add-hook 'find-file-hook #'my-suppress-vc-symlink-prompt)
 
 ;; Suppress compiler warnings from web-mode (deprecated stuff)
 (setq warning-suppress-types '((comp)))
@@ -185,19 +173,6 @@
 (use-package elm-mode
   :ensure t)
 
-(use-package arduino-mode
-  :ensure t)
-
-(use-package arduino-cli-mode
-  :ensure t)
-
-(use-package plantuml-mode
-  :ensure t)
-(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
-(setq plantuml-jar-path "~/plantuml.jar")
-(setq plantuml-default-exec-mode 'jar)
-(setq plantuml-output-type "svg")
-
 ;; AESTHETICS  -----------------------
 
 (use-package darktooth-theme
@@ -222,16 +197,6 @@
 (global-set-key (kbd "C-c h") 'ivy-hoogle)
 
 ;; CUSTOM COMMANDS ------------------------------------
-
-(defun export-plantuml-svg ()
-  "Execute shell command of plantuml.jar to export to svg of opened .plantuml file in current buffer."
-  (interactive)
-  (let
-      ((plantuml-exec-path "~/plantuml.jar"))
-    (shell-command (format "java -jar %s -tsvg %s" plantuml-exec-path (buffer-file-name)))))
-
-(with-eval-after-load 'plantuml-mode
-  (define-key plantuml-mode-map (kbd "C-c C-o") 'export-plantuml-svg))
 
 (defun open-init ()
   (interactive)
