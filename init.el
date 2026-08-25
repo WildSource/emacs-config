@@ -1,6 +1,6 @@
 ;;; init.el --- My emacs config -*- lexical-binding: t -*-
 
-;;; Commentary:
+;;; Commentary: debian packages to install -> libtool-bin fzf cmake
 
 ;;; Code:
 
@@ -14,16 +14,6 @@
 
 ;; EMACS SPECIFIC CONFIG
 
-;; font
-;; Add ttf file to /usr/local/share/fonts and run fc-cache -f -v
-(let* ((sys-name (system-name))
-       (laptop-font "TempleOS-12")
-       (desktop-font "TempleOS-20")
-       (chosen-font (if (string= sys-name "tux")
-                         desktop-font
-                       laptop-font)))
-  (add-to-list 'default-frame-alist (cons 'font chosen-font)))
-
 ;; abbrev
 (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
 
@@ -35,7 +25,6 @@
    (ruby . t)
    (haskell . t)))
 (setq org-image-actual-width nil)
-(setq org-agenda-files '("~/emacs-notes/todo"))
 
 ;; autocompletion on file searching in dired mode
 (ido-mode 1)
@@ -58,7 +47,7 @@
 (setq initial-buffer-choice t)
 
 ;; Suppress compiler warnings from web-mode (deprecated stuff)
-(setq warning-suppress-types '((comp)))
+;;(setq warning-suppress-types '((comp)))
 
 ;; USE-PACKAGES -------------------------
 
@@ -128,12 +117,6 @@
         fzf/window-height 15))
 
 ;; QUALITY OF LIFE
-
-(use-package focus
-  :ensure t
-  :config
-  (focus-mode 1))
-
 (use-package beacon
   :ensure t)
 (beacon-mode 1)
@@ -148,10 +131,7 @@
 (use-package eglot
   :ensure t
   :hook ((haskell-mode . eglot-ensure)
-         (elm-mode . eglot-ensure)
-	 (dart-mode . eglot-ensure)
-	 (java-mode . eglot-ensure)
-	 (arduino-mode . eglot-ensure))
+         (elm-mode . eglot-ensure))
   :config
   (setq eglot-confirm-server-edits nil))
 
@@ -160,15 +140,6 @@
 
 (use-package haskell-mode
   :ensure t)
-
-(use-package dart-mode
-  :ensure t)
-
-(use-package flutter
-  :ensure t
-  :after dart-mode
-  :bind (:map dart-mode-map
-              ("C-M-x" . #'flutter-run-or-hot-reload)))
 
 (use-package elm-mode
   :ensure t)
@@ -210,13 +181,29 @@
 ;; STUFF TO RUN AND ENABLE
 
 (electric-pair-mode 1)
+
 (when (not (string-equal (system-name) "tux"))
    (run-with-timer 300 300 #'battery-notification)
    (message "battery notification daemon started !"))
-
 
 ;; Load your theme — this should work if the file provides it
 ;;(load-theme 'automata t)
 (load-theme 'purple-haze t)
 
 ;; BELOW IS MANAGED BY EMACS ITSELF
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(autothemer beacon consult dimmer elm-mode
+		exec-path-from-shell focus fzf golden-ratio
+		haskell-mode ivy-hoogle magit multiple-cursors
+		nyan-mode pdf-tools vterm web-mode)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
