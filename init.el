@@ -86,6 +86,8 @@
 
 (use-package exec-path-from-shell
   :ensure t
+  :init
+  (setq exec-path-from-shell-arguments '("-i"))
   :config
   (exec-path-from-shell-initialize))
 
@@ -131,7 +133,8 @@
 (use-package eglot
   :ensure t
   :hook ((haskell-mode . eglot-ensure)
-         (elm-mode . eglot-ensure))
+         (elm-mode . eglot-ensure)
+	 (ruby-mode .eglot-ensure))
   :config
   (setq eglot-confirm-server-edits nil))
 
@@ -143,6 +146,11 @@
 
 (use-package elm-mode
   :ensure t)
+
+(use-package ruby-mode
+  :ensure t)
+(with-eval-after-load 'eglot
+ (add-to-list 'eglot-server-programs '((ruby-mode ruby-ts-mode) "ruby-lsp")))
 
 ;; AESTHETICS  -----------------------
 
