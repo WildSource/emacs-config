@@ -123,11 +123,6 @@
   :ensure t)
 (beacon-mode 1)
 
-(use-package golden-ratio
-  :ensure t
-  :config
-  (golden-ratio-mode 1))
-
 ;; MAJOR MODES ---------------------------
 
 (use-package eglot
@@ -206,7 +201,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    '(autothemer beacon consult dimmer elm-mode
-		exec-path-from-shell focus fzf golden-ratio
+		exec-path-from-shell focus fzf 
 		haskell-mode ivy-hoogle magit multiple-cursors
 		nyan-mode pdf-tools vterm web-mode)))
 (custom-set-faces
