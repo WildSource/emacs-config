@@ -190,8 +190,7 @@
    (message "battery notification daemon started !"))
 
 ;; Load your theme — this should work if the file provides it
-;;(load-theme 'automata t)
-(load-theme 'purple-haze t)
+(load-theme 'automata t)
 
 ;; BELOW IS MANAGED BY EMACS ITSELF
 (custom-set-variables
