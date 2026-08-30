@@ -25,6 +25,7 @@ cabal.project.local~
 .HTF/
 .ghc.environment.*
 dist-newstyle/
+*.env
 *~" nil :count 3)
     ("haskelllanguage" "{-# LANGUAGE   #-} " nil :count 1)
    ))
