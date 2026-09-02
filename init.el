@@ -1,4 +1,4 @@
-;;; init.el --- My emacs config -*- lexical-binding: t -*-
+ ;;; init.el --- My emacs config -*- lexical-binding: t -*-
 
 ;;; Commentary: debian packages to install -> libtool-bin fzf cmake
 
@@ -149,14 +149,6 @@
 
 ;; AESTHETICS  -----------------------
 
-(use-package dimmer
-  :ensure t
-  :config
-  (dimmer-configure-magit)
-  (dimmer-configure-org)
-  (setq dimmer-fraction 0.50)
-  (dimmer-mode t))
-
 (use-package nyan-mode
   :ensure t
   :config
@@ -191,6 +183,8 @@
 
 ;; Load your theme — this should work if the file provides it
 (load-theme 'automata t)
+;;(load-theme 'green-phosphor t)
+
 
 ;; BELOW IS MANAGED BY EMACS ITSELF
 (custom-set-variables
@@ -199,7 +193,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(autothemer beacon consult dimmer elm-mode
+   '(autothemer beacon consult elm-mode
 		exec-path-from-shell focus fzf 
 		haskell-mode ivy-hoogle magit multiple-cursors
 		nyan-mode pdf-tools vterm web-mode)))
