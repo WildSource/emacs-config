@@ -16,11 +16,24 @@
 (setq latitude 46.893796)
 (setq longitude -71.198849)
 
-(request "http://httpbin.org/get"
-  :parser 'json-read
+(defun get-sun-data ()
+  ""
+  (interactive)
+  (request "https://api.sunrise-sunset.org/v2?lat=36.7201600&lng=-4.4203400"
+  :parser  'json-read
   :success (cl-function
-            (lambda (&key data &allow-other-keys)
-              (message "I sent: %S" (assoc-default 'args data)))))
+	    (lambda (&key data &allow-other-keys)
+	      (let ((sunrise (decode-sunrise data))
+		    (sunset (decode-sunset data)))
+		(insert (format "sunset: %s, sunrise: %s" sunrise sunset)))))))
 
+(defun decode-sunrise (data)
+  "get sunrise time from json data"
+  (assoc 'sunrise data))
+
+(defun decode-sunset (data)
+  "get sunset time from json data"
+  (assoc 'sunset data))
+  
 (provide 'adapt-theme)
 ;;; adapt-theme.el ends here
