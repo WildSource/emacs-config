@@ -18,6 +18,9 @@
 
 ;; EMACS SPECIFIC CONFIG
 
+;; add custom written library directory
+(add-to-list 'load-path (expand-file-name "~/emacs-config/lisp/"))
+
 ;; abbrev
 (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
 
