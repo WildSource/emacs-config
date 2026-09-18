@@ -1,6 +1,10 @@
  ;;; init.el --- My emacs config -*- lexical-binding: t -*-
 
 ;;; Commentary: debian packages to install -> libtool-bin fzf cmake
+;; debian apt command to run before evaluating the config file
+;;
+;; sudo apt update && sudo apt install -y git fzf build-essential cmake libtool-bin libvterm-dev libpoppler-glib-dev libpoppler-private-dev zlib1g-dev libpng-dev imagemagick qrencode texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra	
+;; l-cli on github
 
 ;;; Code:
 
