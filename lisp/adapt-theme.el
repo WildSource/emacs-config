@@ -13,13 +13,14 @@
 
 ;;; Code:
 
-(defun adapt-theme-hello ()
-  "Say hello to the user."
-  (message "Hello from my custom package!"))
+(setq latitude 46.893796)
+(setq longitude -71.198849)
 
-(defun get-current-date ()
-  "gets date from clock"
-  (message (format-time-string "%Y-%m-%d")))
+(request "http://httpbin.org/get"
+  :parser 'json-read
+  :success (cl-function
+            (lambda (&key data &allow-other-keys)
+              (message "I sent: %S" (assoc-default 'args data)))))
 
 (provide 'adapt-theme)
 ;;; adapt-theme.el ends here

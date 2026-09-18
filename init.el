@@ -161,6 +161,11 @@
   :config
   (nyan-mode 1))  ;; Enable nyan-mode
 
+;; CUSTOM ELISP PACKAGE DEPENDENCIES --------------
+
+(use-package request
+  :ensure t)
+
 ;; KEYBINDS -----------------
 
 (global-set-key (kbd "C-c i") 'open-init)
@@ -200,10 +205,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(autothemer beacon consult elm-mode
-		exec-path-from-shell focus fzf 
+   '(autothemer beacon consult elm-mode exec-path-from-shell focus fzf
 		haskell-mode ivy-hoogle magit multiple-cursors
-		nyan-mode pdf-tools vterm web-mode)))
+		nyan-mode pdf-tools request vterm web-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
