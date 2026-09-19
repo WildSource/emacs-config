@@ -23,9 +23,11 @@
   :parser  'json-read
   :success (cl-function
 	    (lambda (&key data &allow-other-keys)
-	      (let ((sunrise (decode-sunrise data))
-		    (sunset (decode-sunset data)))
-		(insert (format "sunset: %s, sunrise: %s" sunrise sunset)))))))
+	      (let* ((sunrise-cons (decode-sunrise data))
+		    (sunset-cons (decode-sunset data))
+		    (sunrise (cdr sunrise-cons))
+		    (sunset (cdr sunset-cons)))
+		(insert (format "%s, %s" sunrise sunset)))))))
 
 (defun decode-sunrise (data)
   "get sunrise time from json data"
@@ -34,6 +36,10 @@
 (defun decode-sunset (data)
   "get sunset time from json data"
   (assoc 'sunset data))
+
+(defun get-current-time ()
+  "get time from clock"
+  (insert (format-time-string "%H:%M")))
   
 (provide 'adapt-theme)
 ;;; adapt-theme.el ends here
