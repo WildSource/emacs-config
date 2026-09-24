@@ -103,5 +103,6 @@ dist-newstyle/
 *.env
 *~" nil :count 0)
     ("haskelllanguage" "{-# LANGUAGE   #-} " nil :count 0)
+    ("shebang" "#/!/bin/bash" nil :count 2)
    ))
 
