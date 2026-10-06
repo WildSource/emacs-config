@@ -18,6 +18,14 @@
 
 ;; EMACS SPECIFIC CONFIG
 
+(defun enable-transparency ()
+  "Enable transparency if on laptop otherwise, it's disabled"
+  (let* ((chassis (shell-command-to-string "hostnamectl | grep \"Chassis\""))
+	 (is-laptop (string-search "laptop" chassis)))
+    (when is-laptop
+      (set-frame-parameter nil 'alpha-background 50) ; For current frame
+      (add-to-list 'default-frame-alist '(alpha-background . 50))))) ; For all new frames henceforth
+
 ;; add custom written library directory
 (add-to-list 'load-path (expand-file-name "~/emacs-config/lisp/"))
 
@@ -186,16 +194,12 @@
             (shell-command (format "notify-send \"%s\"\"" formatted-message)))))
     
 ;; STUFF TO RUN AND ENABLE
-
+(enable-transparency)
 (electric-pair-mode 1)
 
-(when (not (string-equal (system-name) "tux"))
-   (run-with-timer 300 300 #'battery-notification)
-   (message "battery notification daemon started !"))
-
 ;; Load your theme — this should work if the file provides it
-(load-theme 'automata t)
-;;(load-theme 'cyberpunk t)
+;;(load-theme 'automata t)
+(load-theme 'cyberpunk t)
 
 
 ;; BELOW IS MANAGED BY EMACS ITSELF
