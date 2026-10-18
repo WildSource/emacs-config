@@ -160,7 +160,10 @@
 (use-package ruby-mode
   :ensure t)
 (with-eval-after-load 'eglot
- (add-to-list 'eglot-server-programs '((ruby-mode ruby-ts-mode) "ruby-lsp")))
+  (add-to-list 'eglot-server-programs '((ruby-mode ruby-ts-mode) "ruby-lsp")))
+
+(use-package markdown-mode
+  :ensure t)
 
 ;; AESTHETICS  -----------------------
 
@@ -198,8 +201,8 @@
 (electric-pair-mode 1)
 
 ;; Load your theme — this should work if the file provides it
-;;(load-theme 'automata t)
-(load-theme 'cyberpunk t)
+(load-theme 'automata t)
+;;(load-theme 'cyberpunk t)
 
 
 ;; BELOW IS MANAGED BY EMACS ITSELF
@@ -210,8 +213,9 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    '(autothemer beacon consult elm-mode exec-path-from-shell focus fzf
-		haskell-mode ivy-hoogle magit multiple-cursors
-		nyan-mode pdf-tools request vterm web-mode)))
+		haskell-mode ivy-hoogle magit markdown-mode
+		multiple-cursors nyan-mode pdf-tools request vterm
+		web-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
