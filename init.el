@@ -32,6 +32,9 @@
 ;; abbrev
 (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
 
+;; font size
+(set-face-attribute 'default nil :height 200)
+
 ;; org-mode
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -187,22 +190,14 @@
 (defun open-init ()
   (interactive)
   (find-file "~/emacs-config/init.el"))
-
-(defun battery-notification ()
-  "If battery power under 20% notifies user through emacs"
-  (let* ((battery-power-str (string-trim (shell-command-to-string "cat /sys/class/power_supply/BAT0/capacity")))
-	 (battery-power-num (string-to-number battery-power-str))
-	 (formatted-message (concat "Careful ! Your battery is at " battery-power-str)))
-    (when (<= battery-power-num 20)
-            (shell-command (format "notify-send \"%s\"\"" formatted-message)))))
     
 ;; STUFF TO RUN AND ENABLE
 (enable-transparency)
 (electric-pair-mode 1)
 
 ;; Load your theme — this should work if the file provides it
-(load-theme 'automata t)
-;;(load-theme 'cyberpunk t)
+;;(load-theme 'automata t)
+(load-theme 'cyberpunk t)
 
 
 ;; BELOW IS MANAGED BY EMACS ITSELF
