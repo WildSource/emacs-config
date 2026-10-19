@@ -190,7 +190,12 @@
 (defun open-init ()
   (interactive)
   (find-file "~/emacs-config/init.el"))
-    
+
+(defun toggle-transparency ()
+  (interactive)
+  (set-frame-parameter nil 'alpha-background 50)
+  (add-to-list 'default-frame-alist '(alpha-background . 50)))
+
 ;; STUFF TO RUN AND ENABLE
 (enable-transparency)
 (electric-pair-mode 1)
