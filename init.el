@@ -18,14 +18,6 @@
 
 ;; EMACS SPECIFIC CONFIG
 
-(defun enable-transparency ()
-  "Enable transparency if on laptop otherwise, it's disabled"
-  (let* ((chassis (shell-command-to-string "hostnamectl | grep \"Chassis\""))
-	 (is-laptop (string-search "laptop" chassis)))
-    (when is-laptop
-      (set-frame-parameter nil 'alpha-background 50) ; For current frame
-      (add-to-list 'default-frame-alist '(alpha-background . 50))))) ; For all new frames henceforth
-
 ;; add custom written library directory
 (add-to-list 'load-path (expand-file-name "~/emacs-config/lisp/"))
 
@@ -184,6 +176,9 @@
 
 (global-set-key (kbd "C-c i") 'open-init)
 (global-set-key (kbd "C-c h") 'ivy-hoogle)
+(global-set-key (kbd "C-c t") 'toggle-switch-theme)
+(global-set-key (kbd "C-c c") 'toggle-transparency)
+
 
 ;; CUSTOM COMMANDS ------------------------------------
 
@@ -191,18 +186,74 @@
   (interactive)
   (find-file "~/emacs-config/init.el"))
 
+;; transparency
+
+(defun set-transparency (intensity)
+  (set-frame-parameter nil 'alpha-background intensity) ; For current frame
+  (add-to-list 'default-frame-alist '(alpha-background . intensity))) ; For all new frames henceforth
+
+(defun automated-transparency ()
+  "Enable transparency if on laptop otherwise, it's disabled"
+  (interactive)
+  (let* ((chassis (shell-command-to-string "hostnamectl | grep \"Chassis\""))
+	 (is-laptop (string-search "laptop" chassis)))
+    (when is-laptop
+      (enable-transparency)))) 
+
+;; Takes a while to apply
+(defun enable-transparency ()
+  (interactive)
+  (set-transparency 50)
+  (setq transparency t)
+  (message "Transparency enabled"))
+
+;; Applies instantly
+(defun disable-transparency ()
+  (interactive)
+  (set-transparency 100)
+  (setq transparency nil)
+  (message "Transparency disabled"))
+
+(defcustom transparency nil
+  "Represents if emacs is transparent or not"
+  :type 'boolean)
+
 (defun toggle-transparency ()
   (interactive)
-  (set-frame-parameter nil 'alpha-background 50)
-  (add-to-list 'default-frame-alist '(alpha-background . 50)))
+  (if (symbol-value 'transparency)
+      (disable-transparency)
+    (enable-transparency)))
+
+;; theme switch
+
+(defcustom current-theme 'cyberpunk
+  "Toggle between the automata and cyberpunk theme"
+  :type 'symbol)
+
+(defun set-automata-theme ()
+  "Sets Emacs theme to automata"
+  (load-theme 'automata t)
+  (setq current-theme 'automata))
+
+(defun set-cyberpunk-theme ()
+  "Sets Emacs theme to cyberpunk"
+  (load-theme 'cyberpunk t)
+  (setq current-theme 'cyberpunk))
+
+(defun toggle-switch-theme ()
+  (interactive)
+  (let* ((curr-theme (symbol-value 'current-theme)))
+    (cond
+     ((string-equal curr-theme "cyberpunk") (set-automata-theme))
+     ((string-equal curr-theme "automata") (set-cyberpunk-theme)))))
 
 ;; STUFF TO RUN AND ENABLE
-(enable-transparency)
+(automated-transparency)
 (electric-pair-mode 1)
 
 ;; Load your theme — this should work if the file provides it
 ;;(load-theme 'automata t)
-(load-theme 'cyberpunk t)
+;;(load-theme 'cyberpunk t)
 
 
 ;; BELOW IS MANAGED BY EMACS ITSELF
