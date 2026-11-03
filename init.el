@@ -189,8 +189,9 @@
 ;; transparency
 
 (defun set-transparency (intensity)
-  (set-frame-parameter nil 'alpha-background intensity) ; For current frame
-  (add-to-list 'default-frame-alist '(alpha-background . intensity))) ; For all new frames henceforth
+  (setf (alist-get 'alpha-background default-frame-alist) intensity)
+  (when (display-graphic-p)
+    (set-frame-parameter nil 'alpha-background intensity)))
 
 (defun automated-transparency ()
   "Enable transparency if on laptop otherwise, it's disabled"
@@ -252,8 +253,7 @@
 (electric-pair-mode 1)
 
 ;; Load your theme — this should work if the file provides it
-;;(load-theme 'automata t)
-;;(load-theme 'cyberpunk t)
+(set-cyberpunk-theme)
 
 
 ;; BELOW IS MANAGED BY EMACS ITSELF
