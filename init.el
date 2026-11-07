@@ -3,7 +3,12 @@
 ;;; Commentary: debian packages to install -> libtool-bin fzf cmake
 ;; debian apt command to run before evaluating the config file
 ;;
-;; sudo apt update && sudo apt install -y git fzf build-essential cmake libtool-bin libvterm-dev libpoppler-glib-dev libpoppler-private-dev zlib1g-dev libpng-dev imagemagick qrencode texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra	
+;; sudo apt update && sudo apt install -y git build-essential cmake libtool-bin libvterm-dev libpoppler-glib-dev libpoppler-private-dev zlib1g-dev libpng-dev imagemagick qrencode texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra
+;;
+;; command to run for OpenBSD that installs dependencies
+;;
+;; doas pkg_add git cmake libtool libvterm poppler poppler-utils png ImageMagick qrencode autoconf%2.69 automake%1.15 texlive_base-2026 texlive_texmf-full-2026p0
+;;
 ;; l-cli on github
 
 ;;; Code:
@@ -55,9 +60,6 @@
 
 ;; Set initial buffer to *scratch*
 (setq initial-buffer-choice t)
-
-;; Suppress compiler warnings from web-mode (deprecated stuff)
-;;(setq warning-suppress-types '((comp)))
 
 ;; USE-PACKAGES -------------------------
 
@@ -113,21 +115,6 @@
   :config
   (ivy-mode 1))
 
-(use-package fzf
-  :ensure t
-  :bind ("C-c f" . fzf)
-  :config
-  (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
-        fzf/executable "fzf"
-        fzf/git-grep-args "-i --line-number %s"
-        ;; command used for `fzf-grep-*` functions
-        ;; example usage for ripgrep:
-        ;; fzf/grep-command "rg --no-heading -nH"
-        fzf/grep-command "grep -nrH"
-        ;; If nil, the fzf buffer will appear at the top of the window
-        fzf/position-bottom t
-        fzf/window-height 15))
-
 ;; QUALITY OF LIFE
 (use-package beacon
   :ensure t)
@@ -138,8 +125,7 @@
 (use-package eglot
   :ensure t
   :hook ((haskell-mode . eglot-ensure)
-         (elm-mode . eglot-ensure)
-	 (ruby-mode .eglot-ensure))
+         (elm-mode . eglot-ensure))
   :config
   (setq eglot-confirm-server-edits nil))
 
@@ -151,11 +137,6 @@
 
 (use-package elm-mode
   :ensure t)
-
-(use-package ruby-mode
-  :ensure t)
-(with-eval-after-load 'eglot
-  (add-to-list 'eglot-server-programs '((ruby-mode ruby-ts-mode) "ruby-lsp")))
 
 (use-package markdown-mode
   :ensure t)

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; cyberpunk-theme.el --- Cyberpunk Color Theme
 
 ;; Copyright 2012-2020, Nicholas M. Van Horn
