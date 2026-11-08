@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
  ;;; init.el --- My emacs config -*- lexical-binding: t -*-
 
 ;;; Commentary: debian packages to install -> libtool-bin fzf cmake
