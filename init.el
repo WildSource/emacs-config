@@ -31,7 +31,7 @@
 (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
 
 ;; font size
-(set-face-attribute 'default nil :height 200)
+(set-face-attribute 'default nil :height 150)
 
 ;; org-mode
 (org-babel-do-load-languages
@@ -178,8 +178,8 @@
 (defun automated-transparency ()
   "Enable transparency if on laptop otherwise, it's disabled"
   (interactive)
-  (let* ((chassis (shell-command-to-string "hostnamectl | grep \"Chassis\""))
-	 (is-laptop (string-search "laptop" chassis)))
+  (let* ((chassis (shell-command-to-string "echo $SHELL"))
+	 (is-laptop (string-search "ksh" chassis)))
     (when is-laptop
       (enable-transparency)))) 
 
